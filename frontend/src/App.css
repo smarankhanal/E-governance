@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
-.navbar {
-  background-color: aquamarine;
+* {
+  font-family: serif;
+}
+:root {
+  --color-primary: #2f5f98;
 }

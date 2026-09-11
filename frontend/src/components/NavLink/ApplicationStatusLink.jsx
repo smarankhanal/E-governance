@@ -1,6 +1,8 @@
 import React from "react";
 import { FaPencilAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 export default function ApplicationStatusLink() {
+  const navigate = useNavigate();
   return (
     <div
       className="
@@ -11,6 +13,7 @@ export default function ApplicationStatusLink() {
             hover:-translate-y-1 hover:border-[#2F5F98]
             hover:bg-[#2F5F98] hover:shadow-xl
           "
+      onClick={() => navigate("/reprint/application")}
     >
       {/* Icon */}
       <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-[#2F5F98]/10 transition-all duration-300 group-hover:bg-white/20 ">
