@@ -7,6 +7,7 @@ export default function Input({
   label,
   required = false,
   error,
+  className = "",
   ...props
 }) {
   return (
@@ -30,7 +31,7 @@ export default function Input({
           error
             ? "border-red-500 bg-red-50 focus:border-red-500 focus:ring-1 focus:ring-red-500"
             : "border-slate-300 bg-white focus:border-[#009DAC] focus:ring-1 focus:ring-[#009DAC]"
-        }`}
+        } ${className}`}
         {...props}
       />
       {error && <p className="mt-1 text-xs text-red-500">{error}</p>}

@@ -1,6 +1,7 @@
 import React from "react";
 import { LoginForm } from "../../components";
 import PassportImg from "../../assets/images/Passport.png";
+import { Link } from "react-router-dom";
 export default function Login() {
   return (
     <div className="w-full max-w-4xl mx-auto bg-[#F1F1F1] rounded-2xl">
@@ -12,12 +13,17 @@ export default function Login() {
             className="h-full w-full object-contain"
           />
         </div>
-
         <p className="text-2xl p-2">Sign in</p>
         <p className="text-gray-500 p-2">
           Sign in with your username and password
         </p>
-        <p className="text-[#2f5f98] font-bold p-2">Register a new account</p>
+
+        <Link
+          to="/account/Register"
+          className="text-[#4e5f98] font-bold cursor-pointer"
+        >
+          Register an account
+        </Link>
       </div>
 
       <div>

@@ -1,11 +1,9 @@
 import React from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-export default function AccountBenefitsCard({
-  onClose,
-  onRegister,
-  onApplyWithoutAccount,
-}) {
+export default function AccountBenefitsCard({ onClose }) {
+  const navigate = useNavigate();
   const benefits = [
     "Save and continue applications later",
     "Track submitted applications",
@@ -46,14 +44,14 @@ export default function AccountBenefitsCard({
       {/* Action buttons */}
       <div className="flex flex-col gap-4 sm:flex-row">
         <button
-          onClick={onRegister}
           className="flex-1 rounded-lg bg-blue-900 px-6 py-4 text-center text-white transition hover:bg-blue-950"
+          onClick={() => navigate("/account/Register")}
         >
           Register an account
         </button>
         <button
-          onClick={onApplyWithoutAccount}
           className="flex-1 rounded-lg border border-blue-900 bg-white px-6 py-4 text-center text-blue-900 transition hover:bg-blue-50"
+          onClick={() => navigate("/application/pre-enrollment-home")}
         >
           Apply without an account
         </button>

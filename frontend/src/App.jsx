@@ -8,6 +8,8 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import AuthLayout from "./Layouts/AuthLayout";
 import ScrollToTop from "./components/Common/ScrollToTop";
+import ApplicationType from "./pages/ApplicationType";
+import FAQ from "./pages/FAQ";
 export default function App() {
   return (
     <>
@@ -17,6 +19,11 @@ export default function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/reprint/application" element={<ApplicationStatus />} />
+          <Route
+            path="/application/pre-enrollment-home"
+            element={<ApplicationType />}
+          />
+          <Route path="/faq" element={<FAQ />} />
         </Route>
         {/* ==================== AUTHENTICATION ==================== */}
         <Route element={<AuthLayout />}>

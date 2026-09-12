@@ -14,6 +14,7 @@ export default function Sign() {
               className="h-full w-full object-contain"
             />
           </div>
+
           <p className="text-2xl">Register an account</p>
           <p className="text-gray-500">Please enter your data</p>
         </div>

@@ -6,8 +6,8 @@ export { default as AnchorTag } from "./Common/AnchorTag";
 export { default as Input } from "./Common/Input";
 export { default as Button } from "./Common/Button";
 
-export { default as ApplicationStatusForm } from "./ApplicationStatus/ApplicationStatusForm";
-
+export { default as ApplicationStatusForm } from "./Application/ApplicationStatus/ApplicationStatusForm";
+export { default as ApplicationTypeSelector } from "./Application/ApplicationType/ApplicationTypeSelector";
 export { default as SignupForm } from "./Auth/SignupForm";
 export { default as LoginForm } from "./Auth/LoginForm";
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BiSolidUserAccount } from "react-icons/bi";
 import AccountBenefitsCard from "../SignInBenefits/AccountBenefitCard";
 
-export default function ApplyWithAccount() {
+export default function ApplyWithoutAccount() {
   const [showBenefits, setShowBenefits] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ export default function ApplyWithAccount() {
         </div>
 
         <p className="text-lg font-bold text-[#2F5F98]  transition-colors duration-300 group-hover:text-white">
-          Apply with account
+          Apply without an account
         </p>
       </div>
 
