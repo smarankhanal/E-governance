@@ -1,13 +1,21 @@
 import React from "react";
 import { FiX } from "react-icons/fi";
 import { BsFileEarmarkCheck } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 export default function DataPrivacyConsentModal({
   open = true,
-  onAgree = () => {},
-  onRefuse = () => {},
-  onClose = () => {},
+  onAgree,
+  onRefuse,
+  onClose,
 }) {
+  const navigate = useNavigate();
+
+  const handleOnAgree = () => {
+    onAgree();
+    navigate("/application/integrated-enrollment");
+  };
+
   if (!open) return null;
 
   return (
@@ -44,7 +52,7 @@ export default function DataPrivacyConsentModal({
               I refuse
             </button>
             <button
-              onClick={onAgree}
+              onClick={handleOnAgree}
               className="rounded-md bg-[#2c4a6e] px-8 py-2.5 font-medium text-white transition-colors hover:bg-[#243d5b]"
             >
               I agree

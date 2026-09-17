@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi";
 import Input from "../../Common/Input";
 import Button from "../../Common/Button";
 
-export default function ApplicationStatusForm() {
+export default function PassportStatusForm() {
   return (
     <form>
       <div>

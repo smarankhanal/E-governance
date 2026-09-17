@@ -3,18 +3,15 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 
-import {
-  ApplicationTypeSelector,
-  DataPrivacyConsentModal,
-} from "../components";
-import ApplicationSelection from "../components/Application/ApplicationSelection/ApplicationSelecion";
+import { PassportTypeSelector, DataPrivacyConsentModal } from "../components";
+import PassportPageSelection from "../components/Passport/PassportPageSelection/PassportPageSelecion";
 
-export default function ApplicationType() {
+export default function PassportType() {
   const [expand, setExpand] = useState(true);
   const [selectedDocument, setSelectedDocument] = useState("");
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
 
-  const selected = useSelector((state) => state.application.applicationType);
+  const selected = useSelector((state) => state.passport.passportType);
 
   useEffect(() => {
     if (selected) {
@@ -44,11 +41,11 @@ export default function ApplicationType() {
     <div className="mx-auto w-full max-w-7xl px-5 py-8 shadow-md">
       <div className="text-center">
         <p className="font-serif text-[30px] font-medium uppercase text-[#495057] sm:text-[46px]">
-          Type of application
+          Type of Passport
         </p>
 
         <p className="mt-6 mb-3 font-serif font-normal text-[#92969a]">
-          Please select your application type.
+          Please select your Passport type.
         </p>
       </div>
 
@@ -66,18 +63,18 @@ export default function ApplicationType() {
 
             <span className="font-bold">
               {selected
-                ? `Current application type - ${selected.en1} ${
+                ? `Current Passport type - ${selected.en1} ${
                     selected.en2
                   }${selected.en3 ? ` ${selected.en3}` : ""}`
-                : "Please select your application type"}
+                : "Please select your Passport type"}
             </span>
           </p>
         </div>
 
-        {expand && <ApplicationTypeSelector selected={selected} />}
+        {expand && <PassportTypeSelector selected={selected} />}
 
         {selected && (
-          <ApplicationSelection
+          <PassportPageSelection
             selectedDocument={selectedDocument}
             onDocumentSelect={handleDocumentSelect}
             onNext={handleNext}

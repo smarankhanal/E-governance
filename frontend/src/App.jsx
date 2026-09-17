@@ -2,14 +2,15 @@ import React from "react";
 
 import Login from "./pages/Auth/Login";
 import Sign from "./pages/Auth/Sign";
-import ApplicationStatus from "./pages/ApplicationStatus";
+import PassportStatus from "./pages/PassportStatus";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import AuthLayout from "./Layouts/AuthLayout";
 import ScrollToTop from "./components/Common/ScrollToTop";
-import ApplicationType from "./pages/ApplicationType";
+import PassportType from "./pages/PassportType";
 import FAQ from "./pages/FAQ";
+import PassportForm from "./pages/Auth/PassportForm";
 export default function App() {
   return (
     <>
@@ -18,10 +19,14 @@ export default function App() {
         {/* ==================== MAIN WEBSITE ==================== */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/reprint/application" element={<ApplicationStatus />} />
+          <Route path="/reprint/application" element={<PassportStatus />} />
           <Route
             path="/application/pre-enrollment-home"
-            element={<ApplicationType />}
+            element={<PassportType />}
+          />
+          <Route
+            path="/application/integrated-enrollment"
+            element={<PassportForm />}
           />
           <Route path="/faq" element={<FAQ />} />
         </Route>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaPassport } from "react-icons/fa6";
-import { useDispatch, useSelector } from "react-redux";
-import { setApplicationType } from "../../../store/slice/applicationSlice";
-const applicationTypes = [
+import { useDispatch } from "react-redux";
+import { setPassportType } from "../../../store/slice/passportSlice";
+const passportTypes = [
   {
     id: "first-issuance",
     en1: "FIRST ISSUANCE",
@@ -31,28 +31,28 @@ const applicationTypes = [
   },
 ];
 
-export default function ApplicationTypeSelector({ selected }) {
+export default function PassportTypeSelector({ selected }) {
   const dispatch = useDispatch();
 
   return (
     <>
       <div className="rounded-b-xl border border-t-0 border-slate-200 bg-slate-50/40 px-6 py-8 sm:px-8 sm:py-10 overflow-hidden">
         <div className=" w-full max-w-3xl mx-auto grid grid-cols-1 gap-5 sm:grid-cols-2">
-          {applicationTypes.map((type, index) => {
+          {passportTypes.map((type, index) => {
             const isSelected = selected?.id === type.id;
 
             return (
               <button
                 key={type.id}
                 type="button"
-                onClick={() => dispatch(setApplicationType(type))}
+                onClick={() => dispatch(setPassportType(type))}
                 className={`
                     group flex min-h-37.5 items-center gap-5
                     rounded-xl border px-6 py-6 text-left
                    
 
                    ${
-                     index === applicationTypes.length - 1
+                     index === passportTypes.length - 1
                        ? "sm:col-span-2 sm:justify-self-center"
                        : ""
                    }

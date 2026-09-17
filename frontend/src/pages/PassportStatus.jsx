@@ -1,6 +1,6 @@
 import React from "react";
-import { ApplicationStatusForm } from "../components";
-export default function ApplicationStatus() {
+import { PassportStatusForm } from "../components";
+export default function PassportStatus() {
   return (
     <div className="w-full max-w-4xl mx-auto bg-[#F1F1F1] rounded-2xl">
       <div className="flex flex-col justify-center items-center">
@@ -10,7 +10,7 @@ export default function ApplicationStatus() {
       </div>
 
       <div>
-        <ApplicationStatusForm />
+        <PassportStatusForm />
       </div>
     </div>
   );

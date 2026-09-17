@@ -20,7 +20,7 @@ const RadioOption = ({ label, selected, onClick }) => (
   </button>
 );
 
-export default function ApplicationSelection({
+export default function PassportPageSelection({
   selectedDocument,
   onDocumentSelect,
   onNext,

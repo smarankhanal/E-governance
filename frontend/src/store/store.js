@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import applicationReducer from "./slice/applicationSlice";
+import passportReducer from "./slice/passportSlice";
 export const store = configureStore({
   reducer: {
-    application: applicationReducer,
+    passport: passportReducer,
   },
 });

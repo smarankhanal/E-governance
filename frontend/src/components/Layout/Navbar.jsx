@@ -8,9 +8,7 @@ import UseCaseBadge from "../Common/UseCaseBadge";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const applicationType = useSelector(
-    (state) => state.application.applicationType,
-  );
+  const passportType = useSelector((state) => state.passport.passportType);
 
   const navLinks = [
     {
@@ -36,7 +34,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <AnchorTag key={link.path} text={link.text} href={link.path} />
             ))}
-            {applicationType && <UseCaseBadge label={applicationType.id} />}
+            {passportType && <UseCaseBadge label={passportType.id} />}
           </div>
         </div>
 
@@ -66,7 +64,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <AnchorTag key={link.path} text={link.text} href={link.path} />
           ))}
-          <UseCaseBadge label={applicationType.id} />
+          <UseCaseBadge label={passportType.id} />
         </div>
       )}
     </nav>
