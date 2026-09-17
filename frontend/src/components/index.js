@@ -5,6 +5,7 @@ export { default as Logo } from "./Common/Logo";
 export { default as AnchorTag } from "./Common/AnchorTag";
 export { default as Input } from "./Common/Input";
 export { default as Button } from "./Common/Button";
+export { default as DataPrivacyConsentModal } from "./Common/DataPrivacyConsentModal";
 
 export { default as ApplicationStatusForm } from "./Application/ApplicationStatus/ApplicationStatusForm";
 export { default as ApplicationTypeSelector } from "./Application/ApplicationType/ApplicationTypeSelector";
@@ -18,3 +19,5 @@ export { default as AccountBenefitCard } from "./SignInBenefits/AccountBenefitCa
 export { default as NavLink } from "./NavLink/NavLink";
 
 export { default as HeroImage } from "./HeroImage/HeroImage";
+
+export { default as DateOfBirthPicker } from "./Calendar/DateOfBirthPicker";

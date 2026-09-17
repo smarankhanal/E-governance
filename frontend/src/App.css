@@ -8,3 +8,4 @@ html {
 :root {
   --color-primary: #2f5f98;
 }
+@import "./styles/Calendar.css";

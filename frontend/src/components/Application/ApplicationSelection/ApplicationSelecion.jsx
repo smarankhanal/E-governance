@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const RadioOption = ({ label, selected, onClick }) => (
   <button
@@ -15,24 +15,26 @@ const RadioOption = ({ label, selected, onClick }) => (
     >
       {selected && <span className="w-3 h-3 rounded-full bg-blue-600" />}
     </span>
+
     <span className="text-[#495057] text-[22px]">{label}</span>
   </button>
 );
 
-export default function ApplicationSelection() {
-  const [selected, setSelected] = useState("");
-
+export default function ApplicationSelection({
+  selectedDocument,
+  onDocumentSelect,
+  onNext,
+}) {
   return (
     <div className="min-h-screen w-full bg-white px-6 py-6">
       <div className="max-w-7xl mx-auto">
-        {/* Title */}
         <h1 className="text-slate-800 text-xl font-bold tracking-wide">
           DOCUMENT SELECTION
         </h1>
+
         <div className="h-0.75 bg-[#2f5f98] mt-2 mb-8" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left column */}
           <div>
             <div className="flex items-center gap-3 bg-blue-50 rounded-lg px-5 py-4 mb-8">
               <span className="text-blue-600">
@@ -43,30 +45,24 @@ export default function ApplicationSelection() {
             <div className="mb-8 flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10">
               <RadioOption
                 label="Ordinary 34 pages"
-                selected={selected === "34"}
-                onClick={() => setSelected("34")}
+                selected={selectedDocument === "34"}
+                onClick={() => onDocumentSelect("34")}
               />
 
               <RadioOption
                 label="Ordinary 66 pages"
-                selected={selected === "66"}
-                onClick={() => setSelected("66")}
+                selected={selectedDocument === "66"}
+                onClick={() => onDocumentSelect("66")}
               />
             </div>
-
-            <button
-              onClick={() => setOtherOpen((v) => !v)}
-              className="w-full flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-5 py-4 text-left hover:bg-slate-100 transition-colors"
-            ></button>
           </div>
 
-          {/* Right column */}
           <div>
             <h2 className="text-slate-800 text-lg font-bold text-center">
               READ BEFORE PRE-ENROLLMENT
             </h2>
 
-            <ol className="space-y-6 pl-6 text-[18px]  text-[#495057] leading-relaxed">
+            <ol className="space-y-6 pl-6 text-[18px] text-[#495057] leading-relaxed">
               <li>
                 1.The pre-enrollment form alone is insufficient for passport
                 issuance. Applicant must be present in-person at the enrollment
@@ -92,18 +88,17 @@ export default function ApplicationSelection() {
           </div>
         </div>
       </div>
+
       <div className="float-right mt-20">
         <button
           type="button"
-          disabled={!selected}
-          className={`text-lg font-semibold transition-colors duration-200
-    focus:outline-none
-    ${
-      selected
-        ? "cursor-pointer text-[#2f5f98] hover:text-[#244a78]"
-        : "cursor-not-allowed text-gray-400"
-    }
-  `}
+          disabled={!selectedDocument}
+          onClick={onNext}
+          className={`text-lg font-semibold transition-colors duration-200 focus:outline-none ${
+            selectedDocument
+              ? "cursor-pointer text-[#2f5f98] hover:text-[#244a78]"
+              : "cursor-not-allowed text-gray-400"
+          }`}
         >
           Next →
         </button>

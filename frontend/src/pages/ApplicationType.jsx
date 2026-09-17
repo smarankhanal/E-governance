@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { ApplicationTypeSelector } from "../components";
 import { useSelector } from "react-redux";
+
+import {
+  ApplicationTypeSelector,
+  DataPrivacyConsentModal,
+} from "../components";
 import ApplicationSelection from "../components/Application/ApplicationSelection/ApplicationSelecion";
 
 export default function ApplicationType() {
   const [expand, setExpand] = useState(true);
+  const [selectedDocument, setSelectedDocument] = useState("");
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
 
   const selected = useSelector((state) => state.application.applicationType);
 
@@ -15,6 +21,24 @@ export default function ApplicationType() {
       setExpand(false);
     }
   }, [selected]);
+
+  const handleDocumentSelect = (document) => {
+    setSelectedDocument(document);
+  };
+
+  const handleNext = () => {
+    if (!selectedDocument) return;
+
+    setShowPrivacyModal(true);
+  };
+
+  const handleAgree = () => {
+    setShowPrivacyModal(false);
+  };
+
+  const handleRefuse = () => {
+    setShowPrivacyModal(false);
+  };
 
   return (
     <div className="mx-auto w-full max-w-7xl px-5 py-8 shadow-md">
@@ -30,7 +54,7 @@ export default function ApplicationType() {
 
       <div>
         <div
-          className="flex cursor-pointer items-center rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-sm hover:bg-gray-100"
+          className="flex cursor-pointer items-center rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-sm transition-colors hover:bg-gray-50"
           onClick={() => setExpand((prev) => !prev)}
         >
           <p className="flex items-center gap-2 text-lg font-medium text-[#495057]">
@@ -42,17 +66,31 @@ export default function ApplicationType() {
 
             <span className="font-bold">
               {selected
-                ? `Current application type - ${selected.en1} ${selected.en2}${
-                    selected.en3 ? ` ${selected.en3}` : ""
-                  }`
+                ? `Current application type - ${selected.en1} ${
+                    selected.en2
+                  }${selected.en3 ? ` ${selected.en3}` : ""}`
                 : "Please select your application type"}
             </span>
           </p>
         </div>
 
         {expand && <ApplicationTypeSelector selected={selected} />}
-        {selected && <ApplicationSelection />}
+
+        {selected && (
+          <ApplicationSelection
+            selectedDocument={selectedDocument}
+            onDocumentSelect={handleDocumentSelect}
+            onNext={handleNext}
+          />
+        )}
       </div>
+
+      <DataPrivacyConsentModal
+        open={showPrivacyModal}
+        onAgree={handleAgree}
+        onRefuse={handleRefuse}
+        onClose={() => setShowPrivacyModal(false)}
+      />
     </div>
   );
 }
