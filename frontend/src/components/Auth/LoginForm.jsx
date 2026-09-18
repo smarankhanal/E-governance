@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../Common/Input";
-import Button from "../Common/Button";
+import Button from "../Common/Button/Button";
 import { MdOutlineExitToApp } from "react-icons/md";
 
 export default function LoginForm() {

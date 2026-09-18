@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "./Button/Button";
 
 export default function Input({
   type = "text",
@@ -34,7 +34,7 @@ export default function Input({
         } ${className}`}
         {...props}
       />
-      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+      {error && <p className="mt-1  text-red-500">{error}</p>}
     </div>
   );
 }

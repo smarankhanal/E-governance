@@ -4,7 +4,7 @@ export { default as Footer } from "./Layout/Footer";
 export { default as Logo } from "./Common/Logo";
 export { default as AnchorTag } from "./Common/AnchorTag";
 export { default as Input } from "./Common/Input";
-export { default as Button } from "./Common/Button";
+export { default as Button } from "./Common/Button/Button";
 export { default as DataPrivacyConsentModal } from "./Common/DataPrivacyConsentModal";
 
 export { default as PassportStatusForm } from "./Passport/PassportStatus/PassportStatusForm";
@@ -20,4 +20,7 @@ export { default as NavLink } from "./NavLink/NavLink";
 
 export { default as HeroImage } from "./HeroImage/HeroImage";
 
-export { default as DateOfBirthPicker } from "./Calendar/DateOfBirthPicker";
+export { default as DatePicker } from "./Picker/DatePicker";
+
+export { default as StepIndicator } from "./PassportForm/StepIndicator";
+export { default as AppointmentForm } from "./PassportForm/Form/AppointmentForm";

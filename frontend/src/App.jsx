@@ -10,7 +10,7 @@ import AuthLayout from "./Layouts/AuthLayout";
 import ScrollToTop from "./components/Common/ScrollToTop";
 import PassportType from "./pages/PassportType";
 import FAQ from "./pages/FAQ";
-import PassportForm from "./pages/Auth/PassportForm";
+import PassportForm from "./pages/PassportForm";
 export default function App() {
   return (
     <>

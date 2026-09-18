@@ -1,8 +1,8 @@
 import Input from "../Common/Input";
-import Button from "../Common/Button";
+import Button from "../Common/Button/Button";
 import { FiUser } from "react-icons/fi";
 import { Controller, useForm } from "react-hook-form";
-import DateOfBirthPicker from "../Calendar/DateOfBirthPicker";
+import DatePicker from "../Picker/DatePicker";
 import { useAgeValidation } from "../../hooks/useAgeValidation";
 
 export default function SignupForm() {
@@ -52,7 +52,8 @@ export default function SignupForm() {
             validate: (value) => validateAge(value),
           }}
           render={({ field }) => (
-            <DateOfBirthPicker
+            <DatePicker
+              label="Date of Birth(AD)"
               value={field.value}
               onChange={(date) => {
                 field.onChange(date);

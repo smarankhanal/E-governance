@@ -1,4 +1,5 @@
 import React from "react";
+import NextButton from "../../Common/Button/NextButton";
 
 const RadioOption = ({ label, selected, onClick }) => (
   <button
@@ -89,19 +90,8 @@ export default function PassportPageSelection({
         </div>
       </div>
 
-      <div className="float-right mt-20">
-        <button
-          type="button"
-          disabled={!selectedDocument}
-          onClick={onNext}
-          className={`text-lg font-semibold transition-colors duration-200 focus:outline-none ${
-            selectedDocument
-              ? "cursor-pointer text-[#2f5f98] hover:text-[#244a78]"
-              : "cursor-not-allowed text-gray-400"
-          }`}
-        >
-          Next →
-        </button>
+      <div className="float-right mt-15">
+        <NextButton disabled={!selectedDocument} onClick={onNext} />
       </div>
     </div>
   );

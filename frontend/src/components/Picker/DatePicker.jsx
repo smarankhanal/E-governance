@@ -3,7 +3,16 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Input from "../Common/Input";
 
-export default function DateOfBirthPicker({ value, onChange, onBlur, error }) {
+export default function DatePicker({
+  label,
+  value,
+  onChange,
+  onBlur,
+  error,
+  placeholder = "YYYY-MM-DD",
+  maxDate,
+  minDate,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDateChange = (date) => {
@@ -11,25 +20,26 @@ export default function DateOfBirthPicker({ value, onChange, onBlur, error }) {
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
 
-    onChange(`${year}-${month}-${day}`);
+    const formattedDate = `${year}-${month}-${day}`;
+
+    onChange(formattedDate);
 
     setIsOpen(false);
 
-    onBlur();
+    onBlur?.();
   };
 
   return (
     <div className="relative">
       <Input
-        label="Date of birth AD"
+        label={label}
         type="text"
-        placeholder="YYYY-MM-DD"
+        placeholder={placeholder}
         value={value || ""}
         error={error}
         required
         readOnly
         onClick={() => setIsOpen((prev) => !prev)}
-        onBlur={onBlur}
         className="cursor-pointer"
       />
 
@@ -38,7 +48,8 @@ export default function DateOfBirthPicker({ value, onChange, onBlur, error }) {
           <Calendar
             value={value ? new Date(`${value}T00:00:00`) : null}
             onChange={handleDateChange}
-            maxDate={new Date()}
+            maxDate={maxDate}
+            minDate={minDate}
             calendarType="gregory"
           />
         </div>

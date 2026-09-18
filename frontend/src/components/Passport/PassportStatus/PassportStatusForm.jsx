@@ -1,7 +1,7 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 import Input from "../../Common/Input";
-import Button from "../../Common/Button";
+import Button from "../../Common/Button/Button";
 
 export default function PassportStatusForm() {
   return (
