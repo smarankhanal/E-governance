@@ -1,62 +1,57 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFormContext } from "react-hook-form";
 
 import AppointmentStep from "../Appointment/AppointmentStep";
 import ServiceTask from "../Appointment/ServiceTask";
 import Time from "../Appointment/Time";
-import CancelPopUp from "../../PopUp/CancelPopUp";
 import AppointmentSummary from "../Appointment/AppointmentSummary";
+import CancelPopUp from "../../PopUp/CancelPopUp";
 
-export default function AppointmentForm() {
+export default function AppointmentForm({ onFormNext }) {
   const navigate = useNavigate();
+  const { trigger } = useFormContext();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
-  // =========================
-  // Next
-  // =========================
-  const handleNext = () => {
-    setCurrentStep((prev) => prev + 1);
+  const handleNext = async () => {
+    let fieldsToValidate = [];
+
+    if (currentStep === 1) {
+      fieldsToValidate = ["province", "district", "location"];
+    }
+
+    if (currentStep === 2) {
+      fieldsToValidate = ["appointmentDate", "appointmentTime"];
+    }
+
+    if (currentStep === 3) {
+      return;
+    }
+
+    const isValid = await trigger(fieldsToValidate);
+
+    if (isValid) {
+      setCurrentStep((prev) => prev + 1);
+    }
   };
 
-  // =========================
-  // Back
-  // =========================
   const handleBack = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  // =========================
-  // Cancel button
-  // =========================
   const handleCancel = () => {
     setShowCancelPopup(true);
   };
 
-  // =========================
-  // Confirm cancellation
-  // =========================
-  const handleConfirmCancel = () => {
-    // Clear appointment data
-    setCurrentStep(1);
-
-    // If you have localStorage data, clear it here
-    localStorage.removeItem("appointment");
-
-    // If you have other appointment-related data:
-    // localStorage.removeItem("appointmentDate");
-    // localStorage.removeItem("appointmentTime");
-    // localStorage.removeItem("appointmentLocation");
-
-    setShowCancelPopup(false);
-
-    // Navigate back to pre-integrated enrollment
-    navigate("/application/pre-enrollment-home");
-  };
-
   const handleClosePopup = () => {
     setShowCancelPopup(false);
+  };
+
+  const handleConfirmCancel = () => {
+    setShowCancelPopup(false);
+    navigate("/application/pre-enrollment-home");
   };
 
   return (
@@ -70,13 +65,15 @@ export default function AppointmentForm() {
       {currentStep === 2 && (
         <Time onNext={handleNext} onBack={handleBack} onCancel={handleCancel} />
       )}
+
       {currentStep === 3 && (
         <AppointmentSummary
-          onNext={handleNext}
           onBack={handleBack}
           onCancel={handleCancel}
+          onFormNext={onFormNext}
         />
       )}
+
       {showCancelPopup && (
         <CancelPopUp
           handleClosePopup={handleClosePopup}

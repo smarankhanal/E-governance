@@ -12,12 +12,9 @@ export default function LocationSelect({
   const [isOpen, setIsOpen] = useState(false);
   const hasValue = Boolean(value);
   const selectedOption = options.find((option) => option.id === value);
-
   const displayValue = selectedOption
     ? selectedOption.name.en
     : value || placeholder;
-
-  // Select an option
   const handleSelect = (option) => {
     onChange?.({
       target: {
@@ -28,10 +25,8 @@ export default function LocationSelect({
     setIsOpen(false);
   };
 
-  // Clear selected value
   const handleClear = (event) => {
     event.stopPropagation();
-
     onChange?.({
       target: {
         value: "",
@@ -43,12 +38,10 @@ export default function LocationSelect({
 
   return (
     <div className="relative flex flex-col gap-2">
-      {/* Label */}
       <label className="font-serif text-base text-[#294e78] sm:text-xl">
         {label} <span className="text-[#294e78]">*</span>
       </label>
 
-      {/* Select Box */}
       <button
         type="button"
         disabled={disabled}
@@ -71,13 +64,11 @@ export default function LocationSelect({
           focus:ring-1
           focus:ring-[#009DAC]
           sm:text-lg
-
           ${
             disabled
               ? "cursor-not-allowed bg-gray-100 text-gray-400"
               : "cursor-pointer"
           }
-
           ${isOpen ? "border-[#009DAC] ring-1 ring-[#009DAC]" : ""}
         `}
       >
@@ -86,7 +77,6 @@ export default function LocationSelect({
         </span>
 
         <div className="flex items-center">
-          {/* Clear button */}
           {hasValue && !disabled && (
             <span
               role="button"
@@ -97,7 +87,6 @@ export default function LocationSelect({
             </span>
           )}
 
-          {/* Arrow */}
           <MdKeyboardArrowDown
             className={`
               h-7 w-7
@@ -110,7 +99,6 @@ export default function LocationSelect({
         </div>
       </button>
 
-      {/* Dropdown */}
       {isOpen && !disabled && (
         <div
           className="

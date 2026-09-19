@@ -1,8 +1,13 @@
 import React from "react";
 import { MdChevronRight } from "react-icons/md";
 
-export default function AppointmentStep({ currentStep }) {
-  const steps = ["Service task", "Time", "Appointment summary"];
+export default function DemographicStep({ currentStep }) {
+  const steps = [
+    "Personal details",
+    "Contact details",
+    "Address details",
+    "Proxy details",
+  ];
 
   return (
     <div className="w-full px-2 py-4 sm:px-4">

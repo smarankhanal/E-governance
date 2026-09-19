@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { MdInfoOutline } from "react-icons/md";
-
-// import CancelButton from "../../Common/Button/CancelButton";
-// import NextButton from "../../Common/Button/NextButton";
-//import LocationSelect from "./LocationSelect";
 import {
   getProvinces,
   getDistricts,
@@ -17,11 +13,9 @@ export default function NepalAddress() {
   // -----------------------------
   // Location state
   // -----------------------------
-
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [location, setLocation] = useState("");
-
   // -----------------------------
   // API data
   // -----------------------------
@@ -29,26 +23,21 @@ export default function NepalAddress() {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [locations, setLocations] = useState([]);
-
   // -----------------------------
   // Loading states
   // -----------------------------
-
   const [loadingProvince, setLoadingProvince] = useState(false);
   const [loadingDistrict, setLoadingDistrict] = useState(false);
   const [loadingLocation, setLoadingLocation] = useState(false);
-
   // -----------------------------
   // Fetch provinces
   // -----------------------------
-
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
         setLoadingProvince(true);
 
         const data = await getProvinces();
-
         setProvinces(data);
       } catch (error) {
         console.error("Failed to fetch provinces:", error);
@@ -76,7 +65,6 @@ export default function NepalAddress() {
         setLoadingDistrict(true);
 
         const data = await getDistricts(province);
-
         setDistricts(data);
       } catch (error) {
         console.error("Failed to fetch districts:", error);
@@ -150,15 +138,6 @@ export default function NepalAddress() {
   // -----------------------------
   // Next button
   // -----------------------------
-
-  const handleNext = () => {
-    console.log({
-      country: "NEPAL",
-      province,
-      district,
-      location,
-    });
-  };
 
   return (
     <div className="w-full px-2 py-4 sm:px-4">

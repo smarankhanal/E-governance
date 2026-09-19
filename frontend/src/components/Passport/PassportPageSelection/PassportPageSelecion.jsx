@@ -88,10 +88,10 @@ export default function PassportPageSelection({
             </ol>
           </div>
         </div>
-      </div>
 
-      <div className="float-right mt-15">
-        <NextButton disabled={!selectedDocument} onClick={onNext} />
+        <div className="float-right mt-2">
+          <NextButton disabled={!selectedDocument} onClick={onNext} />
+        </div>
       </div>
     </div>
   );

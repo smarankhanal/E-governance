@@ -1,34 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { MdInfoOutline } from "react-icons/md";
+import { useFormContext } from "react-hook-form";
 
 import { getProvinces, getDistricts } from "../../../services/addressApi";
+
 import CancelButton from "../../Common/Button/CancelButton";
 import NextButton from "../../Common/Button/NextButton";
 import LocationSelect from "../../PassportForm/Appointment/LocationSelect";
+import InfoAlert from "../../Common/InfoAlert";
+import Heading from "../../Common/Heading";
 
 export default function ServiceTask({ onNext, onCancel }) {
-  // -----------------------------
-  // Location state
-  // -----------------------------
+  const { watch, setValue } = useFormContext();
 
-  const [province, setProvince] = useState("");
-  const [district, setDistrict] = useState("");
-  const [location, setLocation] = useState("");
-
-  // -----------------------------
-  // API data
-  // -----------------------------
+  const province = watch("province");
+  const district = watch("district");
+  const location = watch("location");
 
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [locations, setLocations] = useState([]);
 
-  // -----------------------------
-  // Loading states
-  // -----------------------------
-
   const [loadingProvince, setLoadingProvince] = useState(false);
+
   const [loadingDistrict, setLoadingDistrict] = useState(false);
+
   const [loadingLocation, setLoadingLocation] = useState(false);
 
   useEffect(() => {
@@ -64,6 +60,8 @@ export default function ServiceTask({ onNext, onCancel }) {
         setDistricts(data);
       } catch (error) {
         console.error("Failed to fetch districts:", error);
+
+        setDistricts([]);
       } finally {
         setLoadingDistrict(false);
       }
@@ -75,107 +73,104 @@ export default function ServiceTask({ onNext, onCancel }) {
   useEffect(() => {
     if (!district) {
       setLocations([]);
-      setLocation("");
       return;
     }
 
-    const fetchLocations = async () => {
-      try {
-        setLoadingLocation(true);
+    const selectedDistrict = districts.find((item) => item.id === district);
 
-        const selectedDistrict = districts.find((item) => item.id === district);
+    if (!selectedDistrict) {
+      setLocations([]);
+      return;
+    }
 
-        const districtName = selectedDistrict?.name?.en;
+    const districtName = selectedDistrict?.name?.en;
 
-        if (!districtName) {
-          setLocations([]);
-          return;
-        }
-
-        if (districtName.toLowerCase() === "kathmandu") {
-          setLocations([
-            {
-              id: "DOP_KATHMANDU",
-              name: {
-                en: "DOP, Kathmandu",
-              },
-            },
-            {
-              id: "KATHMANDU",
-              name: {
-                en: "Kathmandu",
-              },
-            },
-          ]);
-        } else {
-          // Other districts use the district itself
-          setLocations([
-            {
-              id: selectedDistrict.id,
-              name: {
-                en: districtName,
-              },
-            },
-          ]);
-        }
-
-        // Clear previous location selection
-        setLocation("");
-      } catch (error) {
-        console.error("Failed to set appointment locations:", error);
-        setLocations([]);
-        setLocation("");
-      } finally {
-        setLoadingLocation(false);
-      }
-    };
-
-    fetchLocations();
+    if (districtName?.toLowerCase() === "kathmandu") {
+      setLocations([
+        {
+          id: "DOP_KATHMANDU",
+          name: {
+            en: "DOP, Kathmandu",
+          },
+        },
+        {
+          id: "KATHMANDU",
+          name: {
+            en: "Kathmandu",
+          },
+        },
+      ]);
+    } else {
+      setLocations([
+        {
+          id: selectedDistrict.id,
+          name: {
+            en: districtName,
+          },
+        },
+      ]);
+    }
   }, [district, districts]);
 
   const handleProvinceChange = (event) => {
     const value = event.target.value;
-    setProvince(value);
-    setDistrict("");
-    setLocation("");
+
+    const selectedProvince = provinces.find((item) => item.id === value);
+    setValue("province", value, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    setValue("provinceName", selectedProvince?.name?.en || "");
+
+    setValue("district", "");
+    setValue("districtName", "");
+
+    setValue("location", "");
+    setValue("locationName", "");
+
     setDistricts([]);
     setLocations([]);
   };
 
   const handleDistrictChange = (event) => {
     const value = event.target.value;
-    setDistrict(value);
-    setLocation("");
+
+    const selectedDistrict = districts.find((item) => item.id === value);
+
+    setValue("district", value, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    setValue("districtName", selectedDistrict?.name?.en || "");
+    setValue("location", "");
+    setValue("locationName", "");
     setLocations([]);
+  };
+
+  const handleLocationChange = (event) => {
+    const value = event.target.value;
+
+    const selectedLocation = locations.find((item) => item.id === value);
+
+    setValue("location", value, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    setValue("locationName", selectedLocation?.name?.en || "");
   };
 
   return (
     <div className="w-full px-2 py-4 sm:px-4">
-      {/* Information message */}
-      <div className="mt-8 flex items-center justify-center gap-2 rounded-lg bg-[#e5f0ff] px-4 py-5 text-center text-[#2874e8] sm:mt-12">
-        <MdInfoOutline className="h-6 w-6 shrink-0" />
-
-        <p className="font-serif text-base sm:text-xl">
-          Please select one of the available locations.
-        </p>
-      </div>
+      <InfoAlert text="Please select one of the available locations." />
 
       <section className="mt-10 sm:mt-12">
-        {/* Heading */}
-        <div className="text-center">
-          <h2 className="font-serif text-2xl text-[#1c1c1c] sm:text-3xl">
-            LOCATION
-          </h2>
-
-          <div className="mt-4 h-1 w-full bg-[#37659a]" />
-        </div>
-
-        {/* Location Fields */}
+        <Heading text="LOCATION" />
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Country */}
           <LocationSelect label="Appointment country" value="NEPAL" disabled />
 
-          {/* Province */}
           <LocationSelect
             label="Appointment province"
             value={province}
@@ -186,7 +181,6 @@ export default function ServiceTask({ onNext, onCancel }) {
             }
           />
 
-          {/* District */}
           <LocationSelect
             label="Appointment district"
             value={district}
@@ -198,11 +192,10 @@ export default function ServiceTask({ onNext, onCancel }) {
             }
           />
 
-          {/* Location */}
           <LocationSelect
             label="Appointment location"
             value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={handleLocationChange}
             options={locations}
             disabled={!district || loadingLocation}
             placeholder={
@@ -212,7 +205,6 @@ export default function ServiceTask({ onNext, onCancel }) {
         </div>
       </section>
 
-      {/* Buttons */}
       <div className="mt-16 flex items-center justify-between sm:mt-32">
         <CancelButton onClick={onCancel} />
 

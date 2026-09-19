@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PassportForm() {
+export default function PassportForm({ currentStep }) {
   const steps = [
     "Book an appointment",
     "Demographic data",
@@ -9,18 +9,16 @@ export default function PassportForm() {
     "Summary",
   ];
 
-  const currentStep = 1;
-
   return (
     <div className="w-full px-2 py-4 sm:px-4 sm:py-6">
       <div className="flex w-full items-start">
         {steps.map((label, index) => {
           const stepNumber = index + 1;
-          const isActive = stepNumber <= currentStep;
+          const isActive = stepNumber == currentStep;
           const isLast = index === steps.length - 1;
 
           return (
-            <React.Fragment key={label}>
+            <React.Fragment key={index}>
               {/* Step */}
               <div className="flex min-w-0 flex-1 flex-col items-center">
                 {/* Step Circle */}
