@@ -6,7 +6,7 @@ import AddressDetails from "../DemographicData/AddressDetails";
 import ProxyDetails from "../DemographicData/ProxyDetails";
 import CancelPopUp from "../../PopUp/CancelPopUp";
 
-export default function DemographicForm() {
+export default function DemographicForm({ onFormNext, onFormBack }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
@@ -32,7 +32,11 @@ export default function DemographicForm() {
     <>
       <DemographicStep currentStep={currentStep} />
       {currentStep === 1 && (
-        <PersonalDetails onNext={handleNext} onCancel={handleCancel} />
+        <PersonalDetails
+          onNext={handleNext}
+          onCancel={handleCancel}
+          onFormBack={onFormBack}
+        />
       )}
       {currentStep === 2 && (
         <ContactDetails
@@ -50,7 +54,7 @@ export default function DemographicForm() {
       )}
       {currentStep === 4 && (
         <ProxyDetails
-          onNext={handleNext}
+          onFormNext={onFormNext}
           onBack={handleBack}
           onCancel={handleCancel}
         />

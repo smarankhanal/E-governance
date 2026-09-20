@@ -20,7 +20,7 @@ export default function DemographicStep({ currentStep }) {
           const isActive = stepNumber === currentStep;
 
           return (
-            <>
+            <React.Fragment key={step}>
               <div
                 className={`
                   flex items-center gap-1
@@ -40,7 +40,7 @@ export default function DemographicStep({ currentStep }) {
                   {step}
                 </span>
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

@@ -33,3 +33,8 @@ export const getMunicipalities = async (districtId) => {
 
   return municipalities;
 };
+export const getAllDistricts = async () => {
+  const response = await API.get("/all-district.json");
+
+  return response.data;
+};

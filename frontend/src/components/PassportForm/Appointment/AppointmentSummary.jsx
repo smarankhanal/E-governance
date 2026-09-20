@@ -7,6 +7,9 @@ import BackButton from "../../Common/Button/BackButton";
 import CancelButton from "../../Common/Button/CancelButton";
 import NextButton from "../../Common/Button/NextButton";
 
+const PHONE_REGEX = /^9[678]\d{8}$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
   const {
     register,
@@ -14,13 +17,14 @@ export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
     formState: { errors },
   } = useFormContext();
 
-  const provinceName = watch("provinceName");
-  const districtName = watch("districtName");
-  const locationName = watch("locationName");
+  const provinceName = watch("appointment.provinceName");
+  const districtName = watch("appointment.districtName");
+  const locationName = watch("appointment.locationName");
   const appointmentDate = watch("appointmentDate");
   const appointmentTime = watch("appointmentTime");
-  const contact = watch("contact", "");
-  const email = watch("email", "");
+  const contact = watch("appointment.contact", "");
+  const email = watch("appointment.email", "");
+
   const formattedDate = appointmentDate
     ? new Date(appointmentDate).toLocaleDateString("en-GB", {
         day: "2-digit",
@@ -29,7 +33,9 @@ export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
       })
     : "-";
 
-  const isNextDisabled = !contact?.trim() || !email?.trim();
+  const isContactValid = PHONE_REGEX.test(contact ?? "");
+  const isEmailValid = EMAIL_REGEX.test(email ?? "");
+  const isNextDisabled = !isContactValid || !isEmailValid;
 
   return (
     <div className="w-full px-4 py-6 sm:px-8">
@@ -98,11 +104,11 @@ export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
             placeholder="Enter contact number"
             type="tel"
             required
-            error={errors.contact?.message}
-            {...register("contact", {
+            error={errors.appointment?.contact?.message}
+            {...register("appointment.contact", {
               required: "Contact number is required",
               pattern: {
-                value: /^9[678]\d{8}$/,
+                value: PHONE_REGEX,
                 message: "Enter a valid Nepali mobile number",
               },
             })}
@@ -113,11 +119,11 @@ export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
             placeholder="Enter email address"
             type="email"
             required
-            error={errors.email?.message}
-            {...register("email", {
+            error={errors.appointment?.email?.message}
+            {...register("appointment.email", {
               required: "Email is required",
               pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                value: EMAIL_REGEX,
                 message: "Enter a valid email address",
               },
             })}

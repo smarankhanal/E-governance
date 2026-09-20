@@ -8,12 +8,15 @@ export default function Input({
   required = false,
   error,
   className = "",
+  labelclassName = "",
   ...props
 }) {
   return (
     <div className="flex flex-col gap-2 mx-2">
       {label && (
-        <label className="text-lg font-medium text-[#495070]">
+        <label
+          className={`font-serif text-[#294e78] ${labelclassName || "sm:text-xl"}`}
+        >
           {label}
           {required && (
             <span

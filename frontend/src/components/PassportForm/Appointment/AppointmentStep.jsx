@@ -15,7 +15,7 @@ export default function AppointmentStep({ currentStep }) {
           const isActive = stepNumber === currentStep;
 
           return (
-            <>
+            <React.Fragment key={step}>
               <div
                 className={`
                   flex items-center gap-1
@@ -35,7 +35,7 @@ export default function AppointmentStep({ currentStep }) {
                   {step}
                 </span>
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

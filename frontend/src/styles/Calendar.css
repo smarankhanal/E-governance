@@ -2,76 +2,118 @@
    Calendar days
    ========================================= */
 
-/* All calendar tiles */
+/* Calendar month grid */
+.react-calendar__month-view__days {
+  gap: 2px;
+}
+
+/* =========================================
+   Weekday labels
+   ========================================= */
+
+/* Sunday, Monday, Tuesday... */
+.react-calendar__month-view__weekdays {
+  margin-bottom: 8px;
+}
+
+/* Weekday text */
+.react-calendar__month-view__weekdays__weekday {
+  padding: 8px 0 !important;
+  text-align: center;
+  color: #597fad;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none !important;
+  border: none !important;
+}
+
+/* Remove underline from weekday abbreviations */
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none !important;
+  border: none !important;
+  cursor: default;
+}
+
+/* =========================================
+   Calendar tiles
+   ========================================= */
+
+/* All dates */
 .react-calendar__tile {
   border: none;
-  border-radius: 8px;
-  padding: 12px 6px;
+  border-radius: 10px;
+  padding: 11px 6px;
+  margin: 2px 0;
   color: #495057;
   background: transparent;
-  font-size: 15px;
-  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
 }
 
 /* Normal date hover */
 .react-calendar__tile:enabled:hover {
   background: #eaf4f5;
   color: #009dac;
+  transform: translateY(-1px);
 }
 
 /* =========================================
    Disabled dates
    ========================================= */
 
-/* Dates that cannot be selected */
 .react-calendar__tile:disabled {
-  color: #aeb6bf !important;
-  background: #f3f4f6 !important;
+  color: #b8bec6 !important;
+  background: transparent !important;
   cursor: not-allowed;
 }
 
-/* Disabled date hover should not change */
+/* Disabled hover */
 .react-calendar__tile:disabled:hover {
-  color: #aeb6bf !important;
-  background: #f3f4f6 !important;
+  color: #b8bec6 !important;
+  background: transparent !important;
+  transform: none;
 }
 
 /* =========================================
    Today's date
    ========================================= */
 
-/* Today */
 .react-calendar__tile--now {
-  background: #f3f4f6 !important;
-  color: #6b7280 !important;
+  background: #f3f6f9 !important;
+  color: #2f5f98 !important;
   font-weight: 600;
 }
 
 /* Today hover */
 .react-calendar__tile--now:enabled:hover {
-  background: #e5e7eb !important;
-  color: #495057 !important;
+  background: #e5eef7 !important;
+  color: #2f5f98 !important;
 }
 
 /* =========================================
    Selected date
    ========================================= */
 
-/* Selected date */
 .react-calendar__tile--active {
   background: #dbeafe !important;
   color: #2f5f98 !important;
   font-weight: 700;
+  border-radius: 10px;
 }
 
 /* Selected date hover */
 .react-calendar__tile--active:enabled:hover {
   background: #c7ddf7 !important;
   color: #2f5f98 !important;
+  transform: none;
 }
 
 /* =========================================
-   Selected date that is also today
+   Selected date + today
    ========================================= */
 
 .react-calendar__tile--now.react-calendar__tile--active {
@@ -80,12 +122,11 @@
 }
 
 /* =========================================
-   Dates from previous / next month
+   Previous / next month dates
    ========================================= */
 
-/* Days belonging to another month */
 .react-calendar__month-view__days__day--neighboringMonth {
-  color: #b8bec6;
+  color: #c4c9cf;
 }
 
 /* =========================================
@@ -98,11 +139,54 @@
 
 /* Disabled weekend */
 .react-calendar__month-view__days__day--weekend:disabled {
-  color: #aeb6bf !important;
-  background: #f3f4f6 !important;
+  color: #b8bec6 !important;
+  background: transparent !important;
 }
-/* Hide double previous and double next buttons */
+
+/* =========================================
+   Navigation buttons
+   ========================================= */
+
+/* Hide double previous / next buttons */
 .react-calendar__navigation__prev2-button,
 .react-calendar__navigation__next2-button {
   display: none !important;
+}
+
+/* =========================================
+   Calendar navigation
+   ========================================= */
+
+.react-calendar__navigation button {
+  border: none;
+  background: transparent;
+  color: #2f5f98;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.react-calendar__navigation button:enabled:hover {
+  background: #eaf4f5;
+  color: #009dac;
+}
+
+/* =========================================
+   Remove calendar borders
+   ========================================= */
+
+.react-calendar {
+  border: none !important;
+  box-shadow: none;
+}
+
+/* Remove focus outline */
+.react-calendar button:focus {
+  outline: none;
+}
+
+/* Better keyboard focus */
+.react-calendar button:focus-visible {
+  outline: 2px solid #009dac;
+  outline-offset: 2px;
 }

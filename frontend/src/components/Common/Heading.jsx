@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function Heading({ text }) {
+export default function Heading({ text, className }) {
   return (
-    <div className="text-center">
+    <div className={`text-center ${className}`}>
       <h3 className="font-serif text-left text-[#495057] font-weight:600 text-xl">
         {text}
       </h3>
