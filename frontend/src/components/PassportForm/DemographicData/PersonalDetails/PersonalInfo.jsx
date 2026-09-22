@@ -116,20 +116,23 @@ export default function PersonalDetails({ districts }) {
         <Input
           type="text"
           label="Nationality"
-          value="Nepali"
           required
+          readOnly
+          error={errors.personalDetails?.personal?.nationality?.message}
           {...register("personalDetails.personal.nationality", {
             required: "Nationality is required",
           })}
         />
 
         <Input
+          type="text"
           label="Country"
-          value="Nepal"
           required
           readOnly
           error={errors.personalDetails?.personal?.country?.message}
-          {...register("personalDetails.personal.country")}
+          {...register("personalDetails.personal.country", {
+            required: "Country is required",
+          })}
         />
 
         <Controller
@@ -138,18 +141,21 @@ export default function PersonalDetails({ districts }) {
           rules={{
             required: "Birth place is required",
           }}
-          render={({ field }) => (
-            <Select
-              label="Place of Birth"
-              required
-              options={districts}
-              value={field.value}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              name={field.name}
-              error={errors.personalDetails?.personal?.placeOfBirth?.message}
-            />
-          )}
+          render={({ field }) => {
+            console.log(field);
+            return (
+              <Select
+                label="Place of Birth"
+                required
+                options={districts}
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                name={field.name}
+                error={errors.personalDetails?.personal?.placeOfBirth?.message}
+              />
+            );
+          }}
         />
       </div>
     </div>

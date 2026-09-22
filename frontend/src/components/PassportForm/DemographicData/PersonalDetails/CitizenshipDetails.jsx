@@ -59,7 +59,6 @@ export default function CitizenshipDetails({ districts }) {
           label="Issue Country"
           value="Nepal"
           readOnly
-          required
           {...register("personalDetails.citizenshipDetail.issueCountry")}
         />
 

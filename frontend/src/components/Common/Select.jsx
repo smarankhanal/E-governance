@@ -46,8 +46,7 @@ export default function Select({
     if (typeof option === "string") {
       return option;
     }
-
-    return option?.id ?? option?.value ?? "";
+    return option?.name.en ?? option?.id ?? "";
   };
 
   // Filter options
@@ -62,7 +61,6 @@ export default function Select({
 
   // Display selected option label
   const selectedLabel = selectedOption ? getOptionLabel(selectedOption) : "";
-
   // Focus search input when dropdown opens
   useEffect(() => {
     if (isOpen && searchable) {
@@ -226,9 +224,7 @@ export default function Select({
             ) : (
               filteredOptions.map((option) => {
                 const optionValue = getOptionValue(option);
-
                 const optionLabel = getOptionLabel(option);
-
                 const isSelected = optionValue === selectedValue;
 
                 return (

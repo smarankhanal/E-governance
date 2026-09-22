@@ -14,7 +14,7 @@ import {
 import CancelPopUp from "../components/PopUp/CancelPopUp";
 
 export default function PassportForm() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(3);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
   const navigate = useNavigate();
@@ -45,8 +45,8 @@ export default function PassportForm() {
           dateOfBirth_AD: "",
           dateOfBirth_BS: "",
           nin: "",
-          nationality: "",
-          country: "",
+          nationality: "Nepali",
+          country: "Nepal",
           placeOfBirth: "",
         },
 
@@ -72,7 +72,7 @@ export default function PassportForm() {
       },
 
       residentialAddress: {
-        country: "NEPAL",
+        country: "",
         province: "",
         provinceName: "",
         district: "",
@@ -113,11 +113,11 @@ export default function PassportForm() {
   });
 
   const handleNext = () => {
-    setCurrentStep((prev) => prev + 3);
+    setCurrentStep((prev) => prev + 1);
   };
 
   const handleBack = () => {
-    setCurrentStep((prev) => prev - 3);
+    setCurrentStep((prev) => prev - 1);
   };
 
   const handleCancel = () => {
@@ -146,7 +146,7 @@ export default function PassportForm() {
       >
         <StepIndicator currentStep={currentStep} />
 
-        {currentStep === 1 && (
+        {/* {currentStep === 1 && (
           <AppointmentForm onFormNext={handleNext} onCancel={handleCancel} />
         )}
 
@@ -156,7 +156,7 @@ export default function PassportForm() {
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )}
+        )} */}
 
         {currentStep === 3 && (
           <DocumentForm
