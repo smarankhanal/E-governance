@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import {
   StepIndicator,
@@ -14,8 +15,10 @@ import {
 import CancelPopUp from "../components/PopUp/CancelPopUp";
 
 export default function PassportForm() {
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(2);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
+
+  const passportType = useSelector((state) => state.passport.passportType);
 
   const navigate = useNavigate();
 
@@ -102,22 +105,55 @@ export default function PassportForm() {
         tole: "",
         houseNumber: "",
       },
-
-      documents: {
-        citizenship: null,
-        photo: null,
-      },
+      documents: [
+        {
+          id: "citizenship",
+          label: "Citizenship certificate (both sides)",
+          required: true,
+          maxScans: 2,
+          files: [],
+        },
+        {
+          id: "marriage",
+          label: "Marriage registration/Divorce certificate",
+          required: false,
+          maxScans: 1,
+          files: [],
+        },
+        {
+          id: "national-id",
+          label: "National eID",
+          required: false,
+          maxScans: 1,
+          files: [],
+        },
+        {
+          id: "academic",
+          label: "Academic certificate",
+          required: false,
+          maxScans: 1,
+          files: [],
+        },
+      ],
 
       additionalDocuments: [],
     },
   });
 
+  const steps = [
+    "Book an appointment",
+    "Demographic data",
+    "Previous document",
+    ...(passportType?.keyword !== "NEW" ? ["Supporting documents"] : []),
+    "Summary",
+  ];
+
   const handleNext = () => {
-    setCurrentStep((prev) => prev + 1);
+    setCurrentStep((prev) => Math.min(prev + 1, steps.length));
   };
 
   const handleBack = () => {
-    setCurrentStep((prev) => prev - 1);
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
   const handleCancel = () => {
@@ -144,19 +180,19 @@ export default function PassportForm() {
         onSubmit={methods.handleSubmit(handleSubmitApplication)}
         className="mx-auto w-full max-w-4xl shadow-lg"
       >
-        <StepIndicator currentStep={currentStep} />
+        <StepIndicator currentStep={currentStep} steps={steps} />
 
         {/* {currentStep === 1 && (
           <AppointmentForm onFormNext={handleNext} onCancel={handleCancel} />
         )}
-
+*/}
         {currentStep === 2 && (
           <DemographicForm
             onFormNext={handleNext}
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )} */}
+        )}
 
         {currentStep === 3 && (
           <DocumentForm
@@ -166,15 +202,15 @@ export default function PassportForm() {
           />
         )}
 
-        {currentStep === 4 && (
+        {/* {currentStep === 4 && passportType?.keyword !== "NEW" && (
           <AdditionalDocumentForm
             onFormNext={handleNext}
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )}
+        )} */}
 
-        {currentStep === 5 && (
+        {currentStep === steps.length && (
           <Summary onFormBack={handleBack} onCancel={handleCancel} />
         )}
 

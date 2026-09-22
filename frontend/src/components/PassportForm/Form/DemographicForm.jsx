@@ -9,11 +9,11 @@ export default function DemographicForm({ onFormNext, onFormBack, onCancel }) {
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleNext = () => {
-    setCurrentStep((prev) => prev + 3);
+    setCurrentStep((prev) => prev + 1);
   };
 
   const handleBack = () => {
-    setCurrentStep((prev) => prev - 3);
+    setCurrentStep((prev) => prev - 1);
   };
 
   return (
@@ -28,7 +28,7 @@ export default function DemographicForm({ onFormNext, onFormBack, onCancel }) {
         />
       )}
 
-      {/* {currentStep === 2 && (
+      {currentStep === 2 && (
         <ContactDetails
           onNext={handleNext}
           onBack={handleBack}
@@ -43,7 +43,7 @@ export default function DemographicForm({ onFormNext, onFormBack, onCancel }) {
           onCancel={onCancel}
         />
       )}
-*/}
+
       {currentStep === 4 && (
         <ProxyDetails
           onFormNext={onFormNext}
