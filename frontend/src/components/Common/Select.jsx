@@ -16,63 +16,84 @@ export default function Select({
   className = "",
   labelClassName = "",
   searchable = true,
-  ...props
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedValue, setSelectedValue] = useState(value);
 
   const searchInputRef = useRef(null);
+  const selectRef = useRef(null);
 
-  // Keep the internal selected value synchronized
-  // with React Hook Form's value.
+  // Keep internal value synchronized with React Hook Form
   useEffect(() => {
-    setSelectedValue(value);
+    setSelectedValue(value ?? "");
   }, [value]);
 
-  // Make sure options is always an array.
+  // Make sure options is always an array
   const safeOptions = Array.isArray(options) ? options : [];
 
-  // Get the text displayed for an option.
-  // Supports both strings and API objects.
-  const getOptionLabel = (option) =>
-    typeof option === "string" ? option : option?.name?.en || "";
+  // Get the label displayed for an option
+  const getOptionLabel = (option) => {
+    if (typeof option === "string") {
+      return option;
+    }
 
-  // Filter options based on the search text.
+    return option?.name?.en || option?.name || option?.label || "";
+  };
+
+  // Get the value stored in React Hook Form
+  const getOptionValue = (option) => {
+    if (typeof option === "string") {
+      return option;
+    }
+
+    return option?.id ?? option?.value ?? "";
+  };
+
+  // Filter options
   const filteredOptions = safeOptions.filter((option) =>
     getOptionLabel(option).toLowerCase().includes(search.toLowerCase()),
   );
 
-  // Find the selected option using its stored value/ID.
-  const selectedOption = safeOptions.find((option) =>
-    typeof option === "string"
-      ? option === selectedValue
-      : option?.id === selectedValue,
+  // Find selected option
+  const selectedOption = safeOptions.find(
+    (option) => getOptionValue(option) === selectedValue,
   );
 
+  // Display selected option label
   const selectedLabel = selectedOption ? getOptionLabel(selectedOption) : "";
 
-  // Focus search input when dropdown opens.
+  // Focus search input when dropdown opens
   useEffect(() => {
     if (isOpen && searchable) {
       searchInputRef.current?.focus();
     }
   }, [isOpen, searchable]);
 
-  // Select an option.
-  const handleSelect = (option) => {
-    const newValue = typeof option === "string" ? option : option?.id || "";
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setIsOpen(false);
+        setSearch("");
+      }
+    };
 
-    // Update the displayed value immediately.
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Select an option
+  const handleSelect = (option) => {
+    const newValue = getOptionValue(option);
+
     setSelectedValue(newValue);
 
-    // Send the value to React Hook Form.
-    onChange?.({
-      target: {
-        name,
-        value: newValue,
-      },
-    });
+    // Controller expects the value directly
+    onChange?.(newValue);
 
     onBlur?.();
 
@@ -80,18 +101,14 @@ export default function Select({
     setIsOpen(false);
   };
 
-  // Clear selected option.
+  // Clear selected option
   const handleClear = (event) => {
     event.stopPropagation();
 
     setSelectedValue("");
 
-    onChange?.({
-      target: {
-        name,
-        value: "",
-      },
-    });
+    // Controller expects an empty value
+    onChange?.("");
 
     onBlur?.();
 
@@ -99,16 +116,22 @@ export default function Select({
     setIsOpen(false);
   };
 
-  return (
-    <div className="relative mx-2 flex flex-col gap-2">
-      {/* Hidden input used by React Hook Form */}
-      {name && (
-        <input type="hidden" name={name} value={selectedValue} readOnly />
-      )}
+  // Toggle dropdown
+  const handleToggle = () => {
+    if (disabled) return;
 
+    setIsOpen((prev) => !prev);
+    setSearch("");
+  };
+
+  return (
+    <div ref={selectRef} className="relative mx-2 flex flex-col gap-2">
       {/* Label */}
       {label && (
-        <label className={`font-serif text-[#294e78] text-xl${labelClassName}`}>
+        <label
+          htmlFor={name}
+          className={`font-serif text-xl text-[#294e78] ${labelClassName}`}
+        >
           {label}
 
           {required && (
@@ -123,14 +146,12 @@ export default function Select({
 
       {/* Select button */}
       <button
+        id={name}
         type="button"
         disabled={disabled}
-        onClick={() => {
-          if (disabled) return;
-
-          setIsOpen((prev) => !prev);
-          setSearch("");
-        }}
+        onClick={handleToggle}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
         className={`flex h-13 w-full items-center justify-between rounded-lg border bg-white px-3 font-serif text-left transition-all duration-200 hover:border-[#009DAC] focus:outline-none focus:ring-1 focus:ring-[#009DAC] sm:text-lg ${
           error ? "border-red-500 bg-red-50" : "border-[#ccd3db]"
         } ${
@@ -140,25 +161,32 @@ export default function Select({
         } ${
           isOpen ? "border-[#009DAC] ring-1 ring-[#009DAC]" : ""
         } ${className}`}
-        {...props}
       >
+        {/* Selected value / placeholder */}
         <span className={selectedLabel ? "text-[#597fad]" : "text-[#8c9299]"}>
           {selectedLabel || placeholder}
         </span>
 
+        {/* Icons */}
         <div className="flex items-center">
-          {/* Clear button */}
           {selectedValue && !disabled && (
             <span
               role="button"
+              tabIndex={0}
+              aria-label="Clear selection"
               onClick={handleClear}
-              className="mr-2 text-[#707985] hover:text-[#34404d]"
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleClear(event);
+                }
+              }}
+              className="mr-2 cursor-pointer text-[#707985] hover:text-[#34404d]"
             >
               <MdClose className="h-6 w-6" />
             </span>
           )}
 
-          {/* Arrow */}
           <MdKeyboardArrowDown
             className={`h-7 w-7 text-[#707985] transition-transform duration-200 ${
               isOpen ? "rotate-180" : ""
@@ -190,15 +218,16 @@ export default function Select({
           )}
 
           {/* Options */}
-          <div className="max-h-60 overflow-y-auto">
+          <div className="max-h-60 overflow-y-auto" role="listbox">
             {filteredOptions.length === 0 ? (
               <div className="px-4 py-4 font-serif text-[#8c9299]">
                 No options found
               </div>
             ) : (
               filteredOptions.map((option) => {
-                const optionValue =
-                  typeof option === "string" ? option : option.id;
+                const optionValue = getOptionValue(option);
+
+                const optionLabel = getOptionLabel(option);
 
                 const isSelected = optionValue === selectedValue;
 
@@ -206,14 +235,16 @@ export default function Select({
                   <button
                     key={optionValue}
                     type="button"
+                    role="option"
+                    aria-selected={isSelected}
                     onClick={() => handleSelect(option)}
                     className={`block w-full px-4 py-3 text-left font-serif text-base transition-colors sm:text-lg ${
                       isSelected
-                        ? "bg-[#eaf2fb] text-[#2F5F98] font-semibold"
+                        ? "bg-[#eaf2fb] font-semibold text-[#2F5F98]"
                         : "text-[#597fad] hover:bg-[#eaf2fb]"
                     }`}
                   >
-                    {getOptionLabel(option)}
+                    {optionLabel}
                   </button>
                 );
               })
@@ -223,7 +254,7 @@ export default function Select({
       )}
 
       {/* Validation error */}
-      {error && <p className="text-sm text-red-500">{error}</p>}
+      {error && <p className="font-serif text-sm text-red-500">{error}</p>}
     </div>
   );
 }

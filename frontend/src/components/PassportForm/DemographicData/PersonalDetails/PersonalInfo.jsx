@@ -39,15 +39,25 @@ export default function PersonalDetails({ districts }) {
             required: "Surname is required",
           })}
         />
-
-        <Select
-          label="Gender"
-          options={genderOptions}
-          required
-          error={errors.personalDetails?.personal?.gender?.message}
-          {...register("personalDetails.personal.gender", {
+        <Controller
+          name="personalDetails.personal.gender"
+          control={control}
+          rules={{
             required: "Gender is required",
-          })}
+          }}
+          render={({ field, fieldState }) => (
+            <Select
+              label="Gender"
+              placeholder="Select gender"
+              options={genderOptions}
+              required
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              name={field.name}
+              error={fieldState.error?.message}
+            />
+          )}
         />
 
         <Controller
@@ -64,7 +74,7 @@ export default function PersonalDetails({ districts }) {
               onChange={(adDate) => {
                 field.onChange(adDate);
                 const bsDate = convertADToBS(adDate);
-                setValue("personalDetails.personal.dateOfBirth_Bs", bsDate, {
+                setValue("personalDetails.personal.dateOfBirth_BS", bsDate, {
                   shouldValidate: true,
                   shouldDirty: true,
                 });
@@ -80,8 +90,8 @@ export default function PersonalDetails({ districts }) {
           type="text"
           required
           readOnly
-          error={errors.personalDetails?.personal?.dateOfBirth_Bs?.message}
-          {...register("personalDetails.personal.dateOfBirth_Bs", {
+          error={errors.personalDetails?.personal?.dateOfBirth_BS?.message}
+          {...register("personalDetails.personal.dateOfBirth_BS", {
             required: "Date of birth is required",
           })}
         />
@@ -104,12 +114,13 @@ export default function PersonalDetails({ districts }) {
         />
 
         <Input
+          type="text"
           label="Nationality"
           value="Nepali"
           required
-          readOnly
-          error={errors.personalDetails?.personal?.nationality?.message}
-          {...register("personalDetails.personal.nationality")}
+          {...register("personalDetails.personal.nationality", {
+            required: "Nationality is required",
+          })}
         />
 
         <Input
@@ -121,14 +132,24 @@ export default function PersonalDetails({ districts }) {
           {...register("personalDetails.personal.country")}
         />
 
-        <Select
-          label="Place of Birth"
-          required
-          options={districts}
-          error={errors.personalDetails?.personal?.placeOfBirth?.message}
-          {...register("personalDetails.personal.placeOfBirth", {
+        <Controller
+          name="personalDetails.personal.placeOfBirth"
+          control={control}
+          rules={{
             required: "Birth place is required",
-          })}
+          }}
+          render={({ field }) => (
+            <Select
+              label="Place of Birth"
+              required
+              options={districts}
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              name={field.name}
+              error={errors.personalDetails?.personal?.placeOfBirth?.message}
+            />
+          )}
         />
       </div>
     </div>

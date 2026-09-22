@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import {
   StepIndicator,
@@ -10,8 +11,13 @@ import {
   Summary,
 } from "../components";
 
+import CancelPopUp from "../components/PopUp/CancelPopUp";
+
 export default function PassportForm() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [showCancelPopup, setShowCancelPopup] = useState(false);
+
+  const navigate = useNavigate();
 
   const methods = useForm({
     mode: "onBlur",
@@ -47,10 +53,11 @@ export default function PassportForm() {
         citizenshipDetail: {
           citizenship: "",
           minorId: "",
-          issueCountry: "",
+          issueCountry: "Nepal",
           issueDistrict: "",
-          issueDate_Bs: "",
+          issueDate_AD: "",
         },
+
         parental: {
           motherName: "",
           motherSurname: "",
@@ -58,19 +65,25 @@ export default function PassportForm() {
           fatherSurname: "",
         },
       },
+
       contact: {
         phoneNumber: "",
         email: "",
       },
+
       residentialAddress: {
         country: "NEPAL",
         province: "",
+        provinceName: "",
         district: "",
+        districtName: "",
         municipality: "",
+        municipalityName: "",
         ward: "",
         street: "",
         houseNumber: "",
       },
+
       proxyDetails: {
         proxy: "",
         firstName: "",
@@ -100,11 +113,25 @@ export default function PassportForm() {
   });
 
   const handleNext = () => {
-    setCurrentStep((prev) => prev + 1);
+    setCurrentStep((prev) => prev + 3);
   };
 
   const handleBack = () => {
-    setCurrentStep((prev) => prev - 1);
+    setCurrentStep((prev) => prev - 3);
+  };
+
+  const handleCancel = () => {
+    setShowCancelPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowCancelPopup(false);
+  };
+
+  const handleConfirmCancel = () => {
+    setShowCancelPopup(false);
+    methods.reset();
+    navigate("/application/pre-enrollment-home");
   };
 
   const handleSubmitApplication = (data) => {
@@ -117,26 +144,46 @@ export default function PassportForm() {
         onSubmit={methods.handleSubmit(handleSubmitApplication)}
         className="mx-auto w-full max-w-4xl shadow-lg"
       >
-        {/* <StepIndicator currentStep={currentStep} /> */}
-        <StepIndicator currentStep="5" />
-        {/* {currentStep === 1 && <AppointmentForm onFormNext={handleNext} />}
+        <StepIndicator currentStep={currentStep} />
+
+        {currentStep === 1 && (
+          <AppointmentForm onFormNext={handleNext} onCancel={handleCancel} />
+        )}
 
         {currentStep === 2 && (
-          <DemographicForm onFormNext={handleNext} onFormBack={handleBack} />
-        )} */}
+          <DemographicForm
+            onFormNext={handleNext}
+            onFormBack={handleBack}
+            onCancel={handleCancel}
+          />
+        )}
 
         {currentStep === 3 && (
-          <DocumentForm onFormNext={handleNext} onFormBack={handleBack} />
+          <DocumentForm
+            onFormNext={handleNext}
+            onFormBack={handleBack}
+            onCancel={handleCancel}
+          />
         )}
 
         {currentStep === 4 && (
           <AdditionalDocumentForm
             onFormNext={handleNext}
             onFormBack={handleBack}
+            onCancel={handleCancel}
           />
         )}
 
-        {currentStep === 5 && <Summary onFormBack={handleBack} />}
+        {currentStep === 5 && (
+          <Summary onFormBack={handleBack} onCancel={handleCancel} />
+        )}
+
+        {showCancelPopup && (
+          <CancelPopUp
+            handleClosePopup={handleClosePopup}
+            handleConfirmCancel={handleConfirmCancel}
+          />
+        )}
       </form>
     </FormProvider>
   );

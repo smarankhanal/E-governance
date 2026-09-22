@@ -1,7 +1,7 @@
-export function useAgeValidation(minAge = 16) {
-  const validateAge = (dateOfBirth) => {
+export function useAgeValidation(dateOfBirth, minAge = 16) {
+  const calculateAge = (dateOfBirth) => {
     if (!dateOfBirth) {
-      return "Date of birth is required";
+      return null;
     }
 
     const dob = new Date(dateOfBirth);
@@ -18,8 +18,21 @@ export function useAgeValidation(minAge = 16) {
       age--;
     }
 
+    return age;
+  };
+
+  const age = calculateAge(dateOfBirth);
+
+  const validateAge = () => {
+    if (!dateOfBirth) {
+      return "Date of birth is required";
+    }
+
     return age >= minAge || `Applicant must be at least ${minAge} years old`;
   };
 
-  return { validateAge };
+  return {
+    age,
+    validateAge,
+  };
 }

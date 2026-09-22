@@ -34,7 +34,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <AnchorTag key={link.path} text={link.text} href={link.path} />
             ))}
-            {passportType && <UseCaseBadge label={passportType.id} />}
+            {passportType && <UseCaseBadge label={passportType.keyword} />}
           </div>
         </div>
 

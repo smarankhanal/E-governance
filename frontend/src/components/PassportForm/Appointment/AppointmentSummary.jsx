@@ -20,8 +20,8 @@ export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
   const provinceName = watch("appointment.provinceName");
   const districtName = watch("appointment.districtName");
   const locationName = watch("appointment.locationName");
-  const appointmentDate = watch("appointmentDate");
-  const appointmentTime = watch("appointmentTime");
+  const appointmentDate = watch("appointment.appointmentDate");
+  const appointmentTime = watch("appointment.appointmentTime");
   const contact = watch("appointment.contact", "");
   const email = watch("appointment.email", "");
 

@@ -4,14 +4,17 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 
 import { PassportTypeSelector, DataPrivacyConsentModal } from "../components";
+
 import PassportPageSelection from "../components/Passport/PassportPageSelection/PassportPageSelecion";
 
 export default function PassportType() {
   const [expand, setExpand] = useState(true);
-  const [selectedDocument, setSelectedDocument] = useState("");
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
 
   const selected = useSelector((state) => state.passport.passportType);
+  const selectedDocument = useSelector(
+    (state) => state.passport.selectedDocument,
+  );
 
   useEffect(() => {
     if (selected) {
@@ -19,13 +22,8 @@ export default function PassportType() {
     }
   }, [selected]);
 
-  const handleDocumentSelect = (document) => {
-    setSelectedDocument(document);
-  };
-
   const handleNext = () => {
     if (!selectedDocument) return;
-
     setShowPrivacyModal(true);
   };
 
@@ -73,13 +71,7 @@ export default function PassportType() {
 
         {expand && <PassportTypeSelector selected={selected} />}
 
-        {selected && (
-          <PassportPageSelection
-            selectedDocument={selectedDocument}
-            onDocumentSelect={handleDocumentSelect}
-            onNext={handleNext}
-          />
-        )}
+        {selected && <PassportPageSelection onNext={handleNext} />}
       </div>
 
       <DataPrivacyConsentModal

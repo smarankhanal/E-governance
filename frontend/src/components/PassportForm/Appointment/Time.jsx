@@ -10,19 +10,23 @@ import BackButton from "../../Common/Button/BackButton";
 
 export default function Time({ onBack, onNext, onCancel }) {
   const { watch, setValue } = useFormContext();
-  const appointmentDate = watch("appointmentDate");
-  const appointmentTime = watch("appointmentTime");
+
+  const appointmentDate = watch("appointment.appointmentDate");
+  const appointmentTime = watch("appointment.appointmentTime");
+
   const handleDateChange = (date) => {
-    setValue("appointmentDate", date, {
+    setValue("appointment.appointmentDate", date, {
       shouldValidate: true,
       shouldDirty: true,
+      shouldTouch: true,
     });
   };
 
   const handleTimeChange = (time) => {
-    setValue("appointmentTime", time, {
+    setValue("appointment.appointmentTime", time, {
       shouldValidate: true,
       shouldDirty: true,
+      shouldTouch: true,
     });
   };
 
@@ -50,7 +54,6 @@ export default function Time({ onBack, onNext, onCancel }) {
       <div className="mt-16 flex items-center justify-between sm:mt-32">
         <div className="flex gap-6">
           <BackButton onClick={onBack} />
-
           <CancelButton onClick={onCancel} />
         </div>
 

@@ -7,27 +7,32 @@ const passportTypes = [
     id: "first-issuance",
     en1: "FIRST ISSUANCE",
     en2: "(NEW)",
+    keyword: "NEW",
   },
   {
     id: "renewal",
     en1: "PASSPORT",
     en2: "RENEWAL",
+    keyword: "RENEWAL",
   },
   {
     id: "lost-stolen",
     en1: "PASSPORT",
     en2: "REPLACEMENT",
     en3: "(LOST/STOLEN)",
+    keyword: "LOST/STOLEN",
   },
   {
     id: "damaged",
     en1: "REPLACEMENT",
     en2: "(DAMAGED)",
+    keyword: "DAMAGED",
   },
   {
     id: "modified",
     en1: "MODIFICATION",
     en2: "(DATA CORRECTION)",
+    keyword: "DATA CORRECTION",
   },
 ];
 

@@ -4,66 +4,51 @@ import PersonalDetails from "../DemographicData/PersonalDetails";
 import ContactDetails from "../DemographicData/ContactDetails";
 import AddressDetails from "../DemographicData/AddressDetails";
 import ProxyDetails from "../DemographicData/ProxyDetails";
-import CancelPopUp from "../../PopUp/CancelPopUp";
 
-export default function DemographicForm({ onFormNext, onFormBack }) {
+export default function DemographicForm({ onFormNext, onFormBack, onCancel }) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [showCancelPopup, setShowCancelPopup] = useState(false);
 
   const handleNext = () => {
-    setCurrentStep((prev) => prev + 1);
+    setCurrentStep((prev) => prev + 3);
   };
+
   const handleBack = () => {
-    setCurrentStep((prev) => prev - 1);
-  };
-  const handleCancel = () => {
-    setShowCancelPopup(true);
+    setCurrentStep((prev) => prev - 3);
   };
 
-  const handleClosePopup = () => {
-    setShowCancelPopup(false);
-  };
-
-  const handleConfirmCancel = () => {
-    setShowCancelPopup(false);
-    navigate("/application/pre-enrollment-home");
-  };
   return (
     <>
       <DemographicStep currentStep={currentStep} />
+
       {currentStep === 1 && (
         <PersonalDetails
           onNext={handleNext}
-          onCancel={handleCancel}
+          onCancel={onCancel}
           onFormBack={onFormBack}
         />
       )}
-      {currentStep === 2 && (
+
+      {/* {currentStep === 2 && (
         <ContactDetails
           onNext={handleNext}
           onBack={handleBack}
-          onCancel={handleCancel}
+          onCancel={onCancel}
         />
       )}
+
       {currentStep === 3 && (
         <AddressDetails
           onNext={handleNext}
           onBack={handleBack}
-          onCancel={handleCancel}
+          onCancel={onCancel}
         />
       )}
+*/}
       {currentStep === 4 && (
         <ProxyDetails
           onFormNext={onFormNext}
           onBack={handleBack}
-          onCancel={handleCancel}
-        />
-      )}
-
-      {showCancelPopup && (
-        <CancelPopUp
-          handleClosePopup={handleClosePopup}
-          handleConfirmCancel={handleConfirmCancel}
+          onCancel={onCancel}
         />
       )}
     </>

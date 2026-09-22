@@ -1,20 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
-
 import AppointmentStep from "../Appointment/AppointmentStep";
 import ServiceTask from "../Appointment/ServiceTask";
 import Time from "../Appointment/Time";
 import AppointmentSummary from "../Appointment/AppointmentSummary";
-import CancelPopUp from "../../PopUp/CancelPopUp";
 
-export default function AppointmentForm({ onFormNext }) {
-  const navigate = useNavigate();
-  const { trigger } = useFormContext();
-
+export default function AppointmentForm({ onFormNext, onCancel }) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [showCancelPopup, setShowCancelPopup] = useState(false);
-
+  const { trigger } = useFormContext();
   const handleNext = async () => {
     let fieldsToValidate = [];
 
@@ -41,43 +34,23 @@ export default function AppointmentForm({ onFormNext }) {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const handleCancel = () => {
-    setShowCancelPopup(true);
-  };
-
-  const handleClosePopup = () => {
-    setShowCancelPopup(false);
-  };
-
-  const handleConfirmCancel = () => {
-    setShowCancelPopup(false);
-    navigate("/application/pre-enrollment-home");
-  };
-
   return (
     <>
       <AppointmentStep currentStep={currentStep} />
 
       {currentStep === 1 && (
-        <ServiceTask onNext={handleNext} onCancel={handleCancel} />
+        <ServiceTask onNext={handleNext} onCancel={onCancel} />
       )}
 
       {currentStep === 2 && (
-        <Time onNext={handleNext} onBack={handleBack} onCancel={handleCancel} />
+        <Time onNext={handleNext} onBack={handleBack} onCancel={onCancel} />
       )}
 
       {currentStep === 3 && (
         <AppointmentSummary
           onBack={handleBack}
-          onCancel={handleCancel}
+          onCancel={onCancel}
           onFormNext={onFormNext}
-        />
-      )}
-
-      {showCancelPopup && (
-        <CancelPopUp
-          handleClosePopup={handleClosePopup}
-          handleConfirmCancel={handleConfirmCancel}
         />
       )}
     </>

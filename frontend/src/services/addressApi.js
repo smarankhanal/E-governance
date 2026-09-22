@@ -35,6 +35,6 @@ export const getMunicipalities = async (districtId) => {
 };
 export const getAllDistricts = async () => {
   const response = await API.get("/all-district.json");
-
+  console.log("Response", response);
   return response.data;
 };

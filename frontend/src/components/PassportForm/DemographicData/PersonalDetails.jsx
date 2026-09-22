@@ -27,11 +27,13 @@ export default function PersonalDetails({ onNext, onCancel, onFormBack }) {
 
     fetchAllDistricts();
   }, []);
+
   return (
     <div className="w-full px-4 py-6 sm:px-8">
       <PersonalInfo districts={districts} />
       <CitizenshipDetails districts={districts} />
       <ParentalDetails />
+
       <div className="mt-16 flex items-center justify-between sm:mt-32">
         <div className="flex gap-6">
           <BackButton onClick={onFormBack} />

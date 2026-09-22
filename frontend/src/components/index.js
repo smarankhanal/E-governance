@@ -27,4 +27,4 @@ export { default as AppointmentForm } from "./PassportForm/Form/AppointmentForm"
 export { default as DemographicForm } from "./PassportForm/Form/DemographicForm";
 export { default as DocumentForm } from "./PassportForm/Form/DocumentForm";
 export { default as AdditionalDocumentForm } from "./PassportForm/Form/AdditionalDocumentForm";
-export { default as Summary } from "./PassportForm/Form/Summary";
+export { default as Summary } from "./PassportForm/Summary/Summary";
