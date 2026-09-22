@@ -4,7 +4,9 @@ import { useFormContext, useWatch } from "react-hook-form";
 import DocumentTypeList from "../SupportingDocument/DocumentTypeList";
 import AddDocumentType from "../SupportingDocument/AddDocumentType";
 import DocumentUpload from "../SupportingDocument/DocumentUpload";
+
 import { useAgeValidation } from "../../../hooks/useAgeValidation";
+
 const documentDefinitions = {
   minor: {
     id: "minor",
@@ -18,6 +20,27 @@ const documentDefinitions = {
     label: "Citizenship",
     required: true,
     maxScans: 2,
+  },
+
+  "passport-front": {
+    id: "passport-front",
+    label: "Passport Front",
+    required: true,
+    maxScans: 1,
+  },
+
+  "passport-back": {
+    id: "passport-back",
+    label: "Passport Back",
+    required: true,
+    maxScans: 1,
+  },
+
+  "police-report": {
+    id: "police-report",
+    label: "Police Report",
+    required: true,
+    maxScans: 1,
   },
 
   marriage: {
@@ -42,9 +65,34 @@ const documentDefinitions = {
   },
 };
 
-const conditionalDocumentIds = ["minor", "citizenship"];
-
 const commonDocumentIds = ["marriage", "national-id", "academic"];
+
+const conditionalDocumentIds = [
+  "minor",
+  "citizenship",
+  "passport-front",
+  "passport-back",
+  "police-report",
+];
+
+const getRequiredDocumentIds = (applicationType, isMinor) => {
+  switch (applicationType) {
+    case "first-issuance":
+      return [isMinor ? "minor" : "citizenship"];
+
+    case "renewal":
+      return ["passport-front", "passport-back"];
+
+    case "lost-stolen":
+      return ["police-report"];
+
+    case "damaged":
+      return ["passport-front", "passport-back"];
+
+    default:
+      return [];
+  }
+};
 
 export default function DocumentForm() {
   const { control, getValues, setValue } = useFormContext();
@@ -54,6 +102,12 @@ export default function DocumentForm() {
       control,
       name: "documents",
     }) || [];
+
+  const applicationType = useWatch({
+    control,
+    name: "application.applicationType",
+    defaultValue: "",
+  });
 
   const dateOfBirth = useWatch({
     control,
@@ -65,57 +119,68 @@ export default function DocumentForm() {
 
   const isMinor = age !== null && age < 16;
 
-  const conditionalDocumentId = isMinor ? "minor" : "citizenship";
+  const requiredDocumentIds = getRequiredDocumentIds(applicationType, isMinor);
 
-  const defaultDocuments = [conditionalDocumentId, ...commonDocumentIds];
+  const defaultDocumentIds = [...requiredDocumentIds, ...commonDocumentIds];
 
   const [selectedDocument, setSelectedDocument] = useState("");
 
   const [showAddDocument, setShowAddDocument] = useState(false);
 
   useEffect(() => {
+    if (!applicationType) return;
+
     const currentDocuments = getValues("documents") || [];
 
-    const currentConditionalDocument = currentDocuments.find((document) =>
-      conditionalDocumentIds.includes(document.id),
-    );
-
-    const documentsWithoutConditional = currentDocuments.filter(
-      (document) => !conditionalDocumentIds.includes(document.id),
-    );
-
-    const updatedDocuments = [];
-
-    const newConditionalDocument =
-      currentConditionalDocument?.id === conditionalDocumentId
-        ? currentConditionalDocument
-        : {
-            ...documentDefinitions[conditionalDocumentId],
-            files: [],
-          };
-
-    updatedDocuments.push(newConditionalDocument);
-
-    commonDocumentIds.forEach((id) => {
+    const requiredDocuments = requiredDocumentIds.map((id) => {
       const existingDocument = currentDocuments.find(
         (document) => document.id === id,
       );
 
       if (existingDocument) {
-        updatedDocuments.push(existingDocument);
-      } else {
-        updatedDocuments.push({
-          ...documentDefinitions[id],
-          files: [],
-        });
+        return {
+          ...existingDocument,
+          required: true,
+        };
       }
+
+      return {
+        ...documentDefinitions[id],
+        files: [],
+      };
     });
 
-    const customDocuments = documentsWithoutConditional.filter(
-      (document) => !commonDocumentIds.includes(document.id),
+    const commonDocuments = commonDocumentIds.map((id) => {
+      const existingDocument = currentDocuments.find(
+        (document) => document.id === id,
+      );
+
+      if (existingDocument) {
+        return {
+          ...existingDocument,
+          required: false,
+        };
+      }
+
+      return {
+        ...documentDefinitions[id],
+        files: [],
+      };
+    });
+
+    const defaultIds = [...requiredDocumentIds, ...commonDocumentIds];
+
+    const customDocuments = currentDocuments.filter(
+      (document) =>
+        !defaultIds.includes(document.id) &&
+        !conditionalDocumentIds.includes(document.id),
     );
 
-    updatedDocuments.push(...customDocuments);
+    const updatedDocuments = [
+      ...requiredDocuments,
+      ...commonDocuments,
+      ...customDocuments,
+    ];
 
     const currentIds = currentDocuments.map((document) => document.id);
 
@@ -131,7 +196,13 @@ export default function DocumentForm() {
         shouldValidate: false,
       });
     }
-  }, [conditionalDocumentId, getValues, setValue]);
+  }, [
+    applicationType,
+    isMinor,
+    requiredDocumentIds.join(","),
+    getValues,
+    setValue,
+  ]);
 
   useEffect(() => {
     if (!documents.length) {
@@ -157,7 +228,7 @@ export default function DocumentForm() {
             selectedDocument={selectedDocument}
             setSelectedDocument={setSelectedDocument}
             onAddDocument={() => setShowAddDocument(true)}
-            defaultDocuments={defaultDocuments}
+            defaultDocuments={defaultDocumentIds}
           />
 
           {showAddDocument && (

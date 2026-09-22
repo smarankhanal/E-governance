@@ -7,42 +7,14 @@ export default function DocumentTypeList({
   selectedDocument,
   setSelectedDocument,
   onAddDocument,
-  defaultDocuments = [],
 }) {
   const { setValue } = useFormContext();
-
-  const handleRemoveDocument = (id) => {
-    const documentToRemove = documents.find((document) => document.id === id);
-
-    if (!documentToRemove) return;
-
-    documentToRemove.files?.forEach((file) => {
-      if (file.preview) {
-        URL.revokeObjectURL(file.preview);
-      }
-    });
-
-    const updatedDocuments = documents.filter((document) => document.id !== id);
-
-    setValue("documents", updatedDocuments, {
-      shouldDirty: true,
-      shouldValidate: true,
-    });
-
-    if (selectedDocument === id) {
-      const nextDocument = updatedDocuments[0];
-
-      setSelectedDocument(nextDocument ? nextDocument.id : "");
-    }
-  };
 
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-45 overflow-hidden rounded-lg border border-slate-300 bg-white">
         {documents.map((document) => {
           const isSelected = selectedDocument === document.id;
-
-          const isDefaultDocument = defaultDocuments.includes(document.id);
 
           return (
             <button
@@ -53,36 +25,31 @@ export default function DocumentTypeList({
                 isSelected ? "bg-[#e5f0ff]" : "bg-white hover:bg-slate-50"
               }`}
             >
-              {!isDefaultDocument && (
-                <span
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleRemoveDocument(document.id);
-                  }}
-                  title="Remove document"
-                  className="absolute right-2 top-2 cursor-pointer text-red-500 transition hover:text-red-700"
-                >
-                  <FiX size={18} />
-                </span>
-              )}
-
               <FiFolder
                 size={48}
                 strokeWidth={1.7}
                 className={isSelected ? "text-red-500" : "text-[#405d7c]"}
               />
 
-              <span
-                className={`mt-2 font-serif text-[18px] leading-9 ${
+              <div
+                className={`mt-2 flex items-center gap-1 font-serif text-[18px] leading-9 ${
                   isSelected ? "text-red-500" : "text-[#405d7c]"
                 }`}
               >
-                {document.label}
-              </span>
+                <span>{document.label}</span>
+
+                {document.required && <span className="text-red-500">*</span>}
+              </div>
 
               {document.files?.length > 0 && (
                 <span className="mt-1 rounded-full bg-[#2F5F98] px-3 py-1 text-xs text-white">
                   {document.files.length}/{document.maxScans}
+                </span>
+              )}
+
+              {document.required && (
+                <span className="mt-1 font-serif text-xs text-red-500">
+                  Required
                 </span>
               )}
             </button>
