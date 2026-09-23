@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaPassport } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { setPassportType } from "../../../store/slice/passportSlice";
+
 const passportTypes = [
   {
     id: "first-issuance",

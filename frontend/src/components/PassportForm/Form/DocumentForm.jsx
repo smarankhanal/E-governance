@@ -1,113 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 import DocumentTypeList from "../SupportingDocument/DocumentTypeList";
 import AddDocumentType from "../SupportingDocument/AddDocumentType";
 import DocumentUpload from "../SupportingDocument/DocumentUpload";
 
 import { useAgeValidation } from "../../../hooks/useAgeValidation";
+import { getRequiredDocumentIds } from "../SupportingDocument/documentUtils";
+import {
+  documentDefinitions,
+  commonDocumentIds,
+  conditionalDocumentIds,
+} from "../SupportingDocument/documentDefinitions";
+import NextButton from "../../Common/Button/NextButton";
+import CancelButton from "../../Common/Button/CancelButton";
+import BackButton from "../../Common/Button/BackButton";
+export default function DocumentForm({ onCancel, onFormNext, onFormBack }) {
+  const { control, getValues, setValue, isValid } = useFormContext();
 
-const documentDefinitions = {
-  minor: {
-    id: "minor",
-    label: "Minor",
-    required: true,
-    maxScans: 2,
-  },
-
-  citizenship: {
-    id: "citizenship",
-    label: "Citizenship",
-    required: true,
-    maxScans: 2,
-  },
-
-  "passport-front": {
-    id: "passport-front",
-    label: "Passport Front",
-    required: true,
-    maxScans: 1,
-  },
-
-  "passport-back": {
-    id: "passport-back",
-    label: "Passport Back",
-    required: true,
-    maxScans: 1,
-  },
-
-  "police-report": {
-    id: "police-report",
-    label: "Police Report",
-    required: true,
-    maxScans: 1,
-  },
-
-  marriage: {
-    id: "marriage",
-    label: "Marriage",
-    required: false,
-    maxScans: 1,
-  },
-
-  "national-id": {
-    id: "national-id",
-    label: "National ID",
-    required: false,
-    maxScans: 1,
-  },
-
-  academic: {
-    id: "academic",
-    label: "Academic",
-    required: false,
-    maxScans: 2,
-  },
-};
-
-const commonDocumentIds = ["marriage", "national-id", "academic"];
-
-const conditionalDocumentIds = [
-  "minor",
-  "citizenship",
-  "passport-front",
-  "passport-back",
-  "police-report",
-];
-
-const getRequiredDocumentIds = (applicationType, isMinor) => {
-  switch (applicationType) {
-    case "first-issuance":
-      return [isMinor ? "minor" : "citizenship"];
-
-    case "renewal":
-      return ["passport-front", "passport-back"];
-
-    case "lost-stolen":
-      return ["police-report"];
-
-    case "damaged":
-      return ["passport-front", "passport-back"];
-
-    default:
-      return [];
-  }
-};
-
-export default function DocumentForm() {
-  const { control, getValues, setValue } = useFormContext();
-
+  const passportType = useSelector((state) => state.passport.passportType);
+  const applicationType = passportType?.keyword;
   const documents =
     useWatch({
       control,
       name: "documents",
     }) || [];
-
-  const applicationType = useWatch({
-    control,
-    name: "application.applicationType",
-    defaultValue: "",
-  });
 
   const dateOfBirth = useWatch({
     control,
@@ -124,7 +42,6 @@ export default function DocumentForm() {
   const defaultDocumentIds = [...requiredDocumentIds, ...commonDocumentIds];
 
   const [selectedDocument, setSelectedDocument] = useState("");
-
   const [showAddDocument, setShowAddDocument] = useState(false);
 
   useEffect(() => {
@@ -137,17 +54,15 @@ export default function DocumentForm() {
         (document) => document.id === id,
       );
 
-      if (existingDocument) {
-        return {
-          ...existingDocument,
-          required: true,
-        };
-      }
-
-      return {
-        ...documentDefinitions[id],
-        files: [],
-      };
+      return existingDocument
+        ? {
+            ...existingDocument,
+            required: true,
+          }
+        : {
+            ...documentDefinitions[id],
+            files: [],
+          };
     });
 
     const commonDocuments = commonDocumentIds.map((id) => {
@@ -155,17 +70,15 @@ export default function DocumentForm() {
         (document) => document.id === id,
       );
 
-      if (existingDocument) {
-        return {
-          ...existingDocument,
-          required: false,
-        };
-      }
-
-      return {
-        ...documentDefinitions[id],
-        files: [],
-      };
+      return existingDocument
+        ? {
+            ...existingDocument,
+            required: false,
+          }
+        : {
+            ...documentDefinitions[id],
+            files: [],
+          };
     });
 
     const defaultIds = [...requiredDocumentIds, ...commonDocumentIds];
@@ -183,7 +96,6 @@ export default function DocumentForm() {
     ];
 
     const currentIds = currentDocuments.map((document) => document.id);
-
     const updatedIds = updatedDocuments.map((document) => document.id);
 
     const documentsChanged =
@@ -218,7 +130,9 @@ export default function DocumentForm() {
       setSelectedDocument(documents[0].id);
     }
   }, [documents, selectedDocument]);
-
+  const requiredDocumentsUploaded = documents
+    .filter((document) => document.required)
+    .every((document) => document.files?.length > 0);
   return (
     <div className="w-full px-4 py-6 sm:px-8">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[220px_1fr]">
@@ -243,6 +157,19 @@ export default function DocumentForm() {
         <DocumentUpload
           documents={documents}
           selectedDocument={selectedDocument}
+        />
+      </div>
+      <div className="mt-16 flex items-center justify-between sm:mt-32">
+        <div className="flex gap-6">
+          <BackButton onClick={onFormBack} />
+
+          <CancelButton onClick={onCancel} />
+        </div>
+
+        <NextButton
+          type="submit"
+          onClick={onFormNext}
+          disabled={!requiredDocumentsUploaded}
         />
       </div>
     </div>

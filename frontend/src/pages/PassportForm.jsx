@@ -15,7 +15,7 @@ import {
 import CancelPopUp from "../components/PopUp/CancelPopUp";
 
 export default function PassportForm() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(3);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
   const passportType = useSelector((state) => state.passport.passportType);
@@ -105,36 +105,8 @@ export default function PassportForm() {
         tole: "",
         houseNumber: "",
       },
-      documents: [
-        {
-          id: "citizenship",
-          label: "Citizenship certificate (both sides)",
-          required: true,
-          maxScans: 2,
-          files: [],
-        },
-        {
-          id: "marriage",
-          label: "Marriage registration/Divorce certificate",
-          required: false,
-          maxScans: 1,
-          files: [],
-        },
-        {
-          id: "national-id",
-          label: "National eID",
-          required: false,
-          maxScans: 1,
-          files: [],
-        },
-        {
-          id: "academic",
-          label: "Academic certificate",
-          required: false,
-          maxScans: 1,
-          files: [],
-        },
-      ],
+
+      documents: [],
 
       additionalDocuments: [],
     },
@@ -143,8 +115,10 @@ export default function PassportForm() {
   const steps = [
     "Book an appointment",
     "Demographic data",
-    "Previous document",
-    ...(passportType?.keyword !== "NEW" ? ["Supporting documents"] : []),
+    "Supporting documents",
+
+    ...(passportType?.keyword !== "NEW" ? ["Previous document"] : []),
+
     "Summary",
   ];
 
@@ -166,7 +140,9 @@ export default function PassportForm() {
 
   const handleConfirmCancel = () => {
     setShowCancelPopup(false);
+
     methods.reset();
+
     navigate("/application/pre-enrollment-home");
   };
 
@@ -184,8 +160,8 @@ export default function PassportForm() {
 
         {/* {currentStep === 1 && (
           <AppointmentForm onFormNext={handleNext} onCancel={handleCancel} />
-        )}
-*/}
+        )} */}
+
         {currentStep === 2 && (
           <DemographicForm
             onFormNext={handleNext}

@@ -1,6 +1,5 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
-import { FiFolder, FiPlusCircle, FiX } from "react-icons/fi";
+import { FiFolder, FiPlusCircle } from "react-icons/fi";
 
 export default function DocumentTypeList({
   documents,
@@ -8,8 +7,6 @@ export default function DocumentTypeList({
   setSelectedDocument,
   onAddDocument,
 }) {
-  const { setValue } = useFormContext();
-
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-45 overflow-hidden rounded-lg border border-slate-300 bg-white">
