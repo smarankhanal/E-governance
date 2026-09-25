@@ -9,7 +9,7 @@ export const getRequiredDocumentIds = (applicationType, isMinor) => {
       return [identityDocument, "passport"];
 
     case "LOST/STOLEN":
-      return [identityDocument, "police_report"];
+      return [identityDocument];
 
     case "DAMAGED":
       return [identityDocument, "passport"];

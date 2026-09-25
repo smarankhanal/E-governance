@@ -9,6 +9,7 @@ export default function DatePicker({
   onChange,
   onBlur,
   error,
+  labelclassName = "",
   placeholder = "YYYY-MM-DD",
   maxDate,
   minDate,
@@ -23,9 +24,11 @@ export default function DatePicker({
     const formattedDate = `${year}-${month}-${day}`;
 
     onChange(formattedDate);
-
+    onBlur?.();
     setIsOpen(false);
+  };
 
+  const handleInputBlur = () => {
     onBlur?.();
   };
 
@@ -35,11 +38,13 @@ export default function DatePicker({
         label={label}
         type="text"
         placeholder={placeholder}
+        labelclassName={labelclassName}
         value={value || ""}
         error={error}
         required
         readOnly
         onClick={() => setIsOpen((prev) => !prev)}
+        onBlur={handleInputBlur}
         className="cursor-pointer"
       />
 

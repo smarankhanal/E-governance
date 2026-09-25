@@ -20,13 +20,6 @@ export const documentDefinitions = {
     maxScans: 2,
   },
 
-  police_report: {
-    id: "police_report",
-    label: "Police Report",
-    required: true,
-    maxScans: 1,
-  },
-
   marriage: {
     id: "marriage",
     label: "Marriage",

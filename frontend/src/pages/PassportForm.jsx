@@ -15,7 +15,7 @@ import {
 import CancelPopUp from "../components/PopUp/CancelPopUp";
 
 export default function PassportForm() {
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(4);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
   const passportType = useSelector((state) => state.passport.passportType);
@@ -106,6 +106,13 @@ export default function PassportForm() {
         houseNumber: "",
       },
 
+      passportRenewal: {
+        passportNumber: "",
+        dateOfIssue: null,
+        placeOfIssue: "",
+        dateOfExpiry: null,
+      },
+
       documents: [],
 
       additionalDocuments: [],
@@ -162,29 +169,29 @@ export default function PassportForm() {
           <AppointmentForm onFormNext={handleNext} onCancel={handleCancel} />
         )} */}
 
-        {currentStep === 2 && (
+        {/* {currentStep === 2 && (
           <DemographicForm
             onFormNext={handleNext}
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )}
+        )} */}
 
-        {currentStep === 3 && (
+        {/* {currentStep === 3 && (
           <DocumentForm
             onFormNext={handleNext}
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )}
+        )} */}
 
-        {/* {currentStep === 4 && passportType?.keyword !== "NEW" && (
+        {currentStep === 4 && passportType?.keyword !== "NEW" && (
           <AdditionalDocumentForm
             onFormNext={handleNext}
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )} */}
+        )}
 
         {currentStep === steps.length && (
           <Summary onFormBack={handleBack} onCancel={handleCancel} />

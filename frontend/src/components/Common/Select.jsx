@@ -14,7 +14,7 @@ export default function Select({
   onBlur,
   name,
   className = "",
-  labelClassName = "",
+  labelclassName = "",
   searchable = true,
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -128,7 +128,7 @@ export default function Select({
       {label && (
         <label
           htmlFor={name}
-          className={`font-serif text-xl text-[#294e78] ${labelClassName}`}
+          className={`font-serif  text-[#294e78] ${labelclassName}`}
         >
           {label}
 
