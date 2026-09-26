@@ -14,8 +14,11 @@ export default function AdditionalDocumentForm({
   onFormNext,
   onCancel,
 }) {
-  const { isValid } = useFormContext();
+  const {
+    formState: { isValid },
+  } = useFormContext();
   const { passportType } = useSelector((state) => state.passport);
+  console.log("Isvalid", isValid);
   return (
     <div>
       {passportType?.keyword === "RENEWAL" && <PassportRenewal />}
@@ -25,7 +28,7 @@ export default function AdditionalDocumentForm({
       )}
       {passportType?.keyword === "DAMAGED" && <DamagedPassport />}
       {passportType?.keyword === "LOST/STOLEN" && <LostStolenPassport />}
-      <div className="mt-16 flex items-center justify-between sm:mt-32">
+      <div className="mt-16 p-5 flex items-center justify-between sm:mt-32">
         <div className="flex gap-6">
           <BackButton onClick={onFormBack} />
           <CancelButton onClick={onCancel} />

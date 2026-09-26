@@ -73,7 +73,7 @@ export default function LostStolenPassport() {
           render={({ field }) => (
             <Select
               label="Place of Issue (District) - For Existing Passport"
-              labelclassName="min-h-10"
+              labelclassName="text-base"
               required
               options={districts}
               value={field.value}

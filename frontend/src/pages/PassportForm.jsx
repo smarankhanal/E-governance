@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+
 import { FormProvider, useForm } from "react-hook-form";
+
 import { useNavigate } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 
 import {
@@ -14,13 +17,19 @@ import {
 
 import CancelPopUp from "../components/PopUp/CancelPopUp";
 
+import { useApplicationSession } from "../Context/ApplicationSessionContext";
+
 export default function PassportForm() {
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(1);
+
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
   const passportType = useSelector((state) => state.passport.passportType);
 
   const navigate = useNavigate();
+
+  const { startApplicationSession, clearApplicationSession, applicationId } =
+    useApplicationSession();
 
   const methods = useForm({
     mode: "onBlur",
@@ -137,25 +146,70 @@ export default function PassportForm() {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
+  /*
+   * Start application session when the
+   * appointment step is completed.
+   */
+  const handleAppointmentNext = () => {
+    startApplicationSession();
+    handleNext();
+  };
+
+  /*
+   * Open cancel confirmation popup.
+   */
   const handleCancel = () => {
     setShowCancelPopup(true);
   };
 
+  /*
+   * Close cancel confirmation popup.
+   */
   const handleClosePopup = () => {
     setShowCancelPopup(false);
   };
 
+  /*
+   * Clear everything and return to
+   * the pre-enrollment page.
+   */
   const handleConfirmCancel = () => {
     setShowCancelPopup(false);
-
     methods.reset();
-
-    navigate("/application/pre-enrollment-home");
+    clearApplicationSession();
+    setCurrentStep(1);
+    navigate("/application/pre-enrollment-home", {
+      replace: true,
+    });
   };
 
+  /*
+   * Submit complete application.
+   */
   const handleSubmitApplication = (data) => {
+    console.log("Application ID:", applicationId);
+
     console.log("Complete application:", data);
   };
+
+  /*
+   * Browser refresh / tab close / leaving page
+   * confirmation.
+   */
+  useEffect(() => {
+    if (!applicationId) {
+      return;
+    }
+
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [applicationId]);
 
   return (
     <FormProvider {...methods}>
@@ -165,25 +219,28 @@ export default function PassportForm() {
       >
         <StepIndicator currentStep={currentStep} steps={steps} />
 
-        {/* {currentStep === 1 && (
-          <AppointmentForm onFormNext={handleNext} onCancel={handleCancel} />
-        )} */}
+        {currentStep === 1 && (
+          <AppointmentForm
+            onFormNext={handleAppointmentNext}
+            onCancel={handleCancel}
+          />
+        )}
 
-        {/* {currentStep === 2 && (
+        {currentStep === 2 && (
           <DemographicForm
             onFormNext={handleNext}
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )} */}
+        )}
 
-        {/* {currentStep === 3 && (
+        {currentStep === 3 && (
           <DocumentForm
             onFormNext={handleNext}
             onFormBack={handleBack}
             onCancel={handleCancel}
           />
-        )} */}
+        )}
 
         {currentStep === 4 && passportType?.keyword !== "NEW" && (
           <AdditionalDocumentForm

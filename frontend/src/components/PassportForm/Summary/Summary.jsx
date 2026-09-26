@@ -169,7 +169,40 @@ export default function Summary({ onFormBack, onCancel }) {
       value1: formData.appointment?.email,
     },
   ];
+  const previousPassportDetails = [
+    {
+      label1: "Passport number",
+      value1: formData.previousDocument?.passportNumber,
+      label2: "Place of issue",
+      value2: formData.previousDocument?.placeOfIssue,
+    },
+    {
+      label1: "Date of issue",
+      value1: formData.previousDocument?.dateOfIssue,
+      label2: "Date of expiry",
+      value2: formData.previousDocument?.dateOfExpiry,
+    },
+  ];
 
+  const lostStolenDetails = [
+    {
+      label1: "Latest Document number",
+      value1: formData.lostStolenPassport?.latestDocumentNumber,
+      label2: "Place of issue",
+      value2: formData.lostStolenPassport?.placeOfIssue,
+    },
+
+    {
+      label1: "Country of theft/loss",
+      value1: formData.lostStolenPassport?.countryOfTheft || "Nepal",
+      label2: "Date of theft/loss",
+      value2: formData.lostStolenPassport?.dateOfTheft,
+    },
+    {
+      label1: "Date of issue",
+      value1: formData.lostStolenPassport?.dateOfIssue,
+    },
+  ];
   return (
     <div className="w-full">
       <InfoAlert
@@ -200,6 +233,18 @@ export default function Summary({ onFormBack, onCancel }) {
         <DetailsTable title="PARENTAL DETAILS" rows={parentalDetails} />
         {/* Proxy Details */}
         {isMinor && <DetailsTable title="PROXY DETAILS" rows={proxyDetails} />}
+        {["RENEWAL", "DAMAGED", "DATA CORRECTION", "LOST/STOLEN"].includes(
+          passportType.keyword,
+        ) && (
+          <DetailsTable
+            title="PREVIOUS PASSPORT DETAILS"
+            rows={previousPassportDetails}
+          />
+        )}
+
+        {passportType.keyword === "LOST/STOLEN" && (
+          <DetailsTable title="LOST/STOLEN DETAILS" rows={lostStolenDetails} />
+        )}
       </div>
 
       {/* Buttons */}
