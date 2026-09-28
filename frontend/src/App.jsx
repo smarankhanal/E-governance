@@ -11,6 +11,7 @@ import ScrollToTop from "./components/Common/ScrollToTop";
 import PassportType from "./pages/PassportType";
 import FAQ from "./pages/FAQ";
 import PassportForm from "./pages/PassportForm";
+import RequestSuccess from "./pages/RequestSuccess";
 export default function App() {
   return (
     <>
@@ -29,6 +30,7 @@ export default function App() {
             element={<PassportForm />}
           />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/success" element={<RequestSuccess />} />
         </Route>
         {/* ==================== AUTHENTICATION ==================== */}
         <Route element={<AuthLayout />}>

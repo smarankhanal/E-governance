@@ -115,13 +115,17 @@ export default function PassportForm() {
         houseNumber: "",
       },
 
-      passportRenewal: {
+      previousDocument: {
         passportNumber: "",
         dateOfIssue: null,
         placeOfIssue: "",
         dateOfExpiry: null,
       },
-
+      lostStolenPassport: {
+        latestDocumentNumber: "",
+        countryOfTheft: "",
+        dateOfTheft: "",
+      },
       documents: [],
 
       additionalDocuments: [],
@@ -132,9 +136,7 @@ export default function PassportForm() {
     "Book an appointment",
     "Demographic data",
     "Supporting documents",
-
     ...(passportType?.keyword !== "NEW" ? ["Previous document"] : []),
-
     "Summary",
   ];
 

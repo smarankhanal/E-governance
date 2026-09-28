@@ -3,7 +3,7 @@ export const documentDefinitions = {
     id: "minor",
     label: "Minor",
     required: true,
-    maxScans: 2,
+    maxScans: 1,
   },
 
   citizenship: {

@@ -1,0 +1,1 @@
+export { generatePassportPDF } from "./generatePassportPDF";

@@ -7,11 +7,14 @@ import InfoAlert from "../../Common/InfoAlert";
 import DetailsTable from "./DetailsTable";
 import { useAgeValidation } from "../../../hooks/useAgeValidation";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Summary({ onFormBack, onCancel }) {
   const { passportType, selectedDocument } = useSelector(
     (state) => state.passport,
   );
+  const navigate = useNavigate();
+
   const { watch } = useFormContext();
   const formData = watch();
   const dateOfBirth = watch("personalDetails.personal.dateOfBirth_AD", "");
@@ -199,10 +202,17 @@ export default function Summary({ onFormBack, onCancel }) {
       value2: formData.lostStolenPassport?.dateOfTheft,
     },
     {
-      label1: "Date of issue",
-      value1: formData.lostStolenPassport?.dateOfIssue,
+      label1: "Date of lost/Theft",
+      value1: formData.lostStolenPassport?.dateOfTheft,
     },
   ];
+  const onApply = () => {
+    navigate("/success", {
+      state: {
+        formData,
+      },
+    });
+  };
   return (
     <div className="w-full">
       <InfoAlert
@@ -258,6 +268,7 @@ export default function Summary({ onFormBack, onCancel }) {
         <button
           type="submit"
           className="rounded-md bg-[#2F5F98] px-8 py-3 font-serif text-base font-medium text-white transition hover:bg-[#294e78]"
+          onClick={onApply}
         >
           APPLY
         </button>

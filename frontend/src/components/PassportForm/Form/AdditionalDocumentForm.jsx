@@ -18,7 +18,6 @@ export default function AdditionalDocumentForm({
     formState: { isValid },
   } = useFormContext();
   const { passportType } = useSelector((state) => state.passport);
-  console.log("Isvalid", isValid);
   return (
     <div>
       {passportType?.keyword === "RENEWAL" && <PassportRenewal />}
