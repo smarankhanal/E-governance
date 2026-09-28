@@ -8,12 +8,14 @@ import DetailsTable from "./DetailsTable";
 import { useAgeValidation } from "../../../hooks/useAgeValidation";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useApplicationSession } from "../../../Context/ApplicationSessionContext";
 
 export default function Summary({ onFormBack, onCancel }) {
   const { passportType, selectedDocument } = useSelector(
     (state) => state.passport,
   );
   const navigate = useNavigate();
+  const { applicationId } = useApplicationSession();
 
   const { watch } = useFormContext();
   const formData = watch();
@@ -207,7 +209,7 @@ export default function Summary({ onFormBack, onCancel }) {
     },
   ];
   const onApply = () => {
-    navigate("/success", {
+    navigate(`/application/${applicationId}/success`, {
       state: {
         formData,
       },

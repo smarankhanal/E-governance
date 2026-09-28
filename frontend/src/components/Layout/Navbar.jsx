@@ -39,23 +39,6 @@ export default function NavBar() {
 
   const isApplicationPage = location.pathname.startsWith("/application");
 
-  useEffect(() => {
-    if (!applicationId) {
-      return;
-    }
-
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue = "";
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [applicationId]);
-
   const handleNavigation = (path) => {
     if (path === "/" && applicationId && isApplicationPage) {
       setShowHomePopup(true);

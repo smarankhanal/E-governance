@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useContext, useState } from "react";
 
 const ApplicationSessionContext = createContext(null);
 
-const SESSION_KEY = "passportApplicationSession";
+export const SESSION_KEY = "passportApplicationSession";
 
 export function ApplicationSessionProvider({ children }) {
   const [applicationId, setApplicationId] = useState(null);

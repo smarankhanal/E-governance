@@ -30,7 +30,10 @@ export default function App() {
             element={<PassportForm />}
           />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/success" element={<RequestSuccess />} />
+          <Route
+            path="/application/:applicationId/success"
+            element={<RequestSuccess />}
+          />
         </Route>
         {/* ==================== AUTHENTICATION ==================== */}
         <Route element={<AuthLayout />}>

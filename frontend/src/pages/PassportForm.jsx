@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -18,6 +18,7 @@ import {
 import CancelPopUp from "../components/PopUp/CancelPopUp";
 
 import { useApplicationSession } from "../Context/ApplicationSessionContext";
+import ReloadNotice from "../components/PopUp/ReloadNotice";
 
 export default function PassportForm() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -142,10 +143,12 @@ export default function PassportForm() {
 
   const handleNext = () => {
     setCurrentStep((prev) => Math.min(prev + 1, steps.length));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBack = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   /*
@@ -194,27 +197,9 @@ export default function PassportForm() {
     console.log("Complete application:", data);
   };
 
-  /*
-   * Browser refresh / tab close / leaving page
-   * confirmation.
-   */
-  useEffect(() => {
-    if (!applicationId) {
-      return;
-    }
-
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue = "";
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [applicationId]);
-
   return (
     <FormProvider {...methods}>
+      <ReloadNotice />
       <form
         onSubmit={methods.handleSubmit(handleSubmitApplication)}
         className="mx-auto w-full max-w-4xl shadow-lg"

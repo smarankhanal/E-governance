@@ -34,12 +34,6 @@ export default function AppointmentForm({ onFormNext, onCancel }) {
     }
 
     if (currentStep === 3) {
-      /*
-       * Don't directly move to the next
-       * main form step.
-       *
-       * Show the 15-minute popup first.
-       */
       setShowStartPopup(true);
       return;
     }
@@ -49,22 +43,16 @@ export default function AppointmentForm({ onFormNext, onCancel }) {
     if (isValid) {
       setCurrentStep((prev) => prev + 1);
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBack = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleStartApplication = () => {
     setShowStartPopup(false);
-
-    /*
-     * This moves PassportForm from
-     * AppointmentForm to DemographicForm.
-     *
-     * PassportForm will start the timer
-     * inside its onFormNext handler.
-     */
     onFormNext();
   };
 
