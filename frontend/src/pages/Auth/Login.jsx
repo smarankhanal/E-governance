@@ -4,7 +4,7 @@ import PassportImg from "../../assets/images/Passport.png";
 import { Link } from "react-router-dom";
 export default function Login() {
   return (
-    <div className="w-full max-w-4xl mx-auto bg-[#F1F1F1] rounded-2xl">
+    <div className="w-full max-w-4xl mx-auto bg-surface rounded-2xl">
       <div className="flex flex-col justify-center items-center">
         <div className="mx-auto  flex h-50 w-50 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm">
           <img
@@ -20,7 +20,7 @@ export default function Login() {
 
         <Link
           to="/account/Register"
-          className="text-[#4e5f98] font-bold cursor-pointer"
+          className="text-link font-bold cursor-pointer"
         >
           Register an account
         </Link>

@@ -40,52 +40,54 @@ export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
   return (
     <div className="w-full px-4 py-6 sm:px-8">
       <section>
-        <h2 className="mb-8 font-serif text-xl uppercase text-[#1c1c1c]">
+        <h2 className="mb-8 font-serif text-xl uppercase text-text-dark">
           Appointment Summary
         </h2>
 
-        <div className="rounded-lg border border-[#d9dee5] bg-white p-6 shadow-sm">
+        <div className="rounded-lg border border-border-card bg-white p-6 shadow-sm">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <p className="text-sm text-[#8c9299]">Appointment Country</p>
+              <p className="text-sm text-text-primary">Appointment Country</p>
 
-              <p className="mt-1 font-medium text-[#495057]">Nepal</p>
+              <p className="mt-1 font-medium text-text-primary">Nepal</p>
             </div>
 
             <div>
-              <p className="text-sm text-[#8c9299]">Appointment Province</p>
+              <p className="text-sm text-text-primary">Appointment Province</p>
 
-              <p className="mt-1 font-medium text-[#495057]">
+              <p className="mt-1 font-medium text-text-primary">
                 {provinceName || "-"}
               </p>
             </div>
 
             <div>
-              <p className="text-sm text-[#8c9299]">Appointment District</p>
+              <p className="text-sm text-text-primary">Appointment District</p>
 
-              <p className="mt-1 font-medium text-[#495057]">
+              <p className="mt-1 font-medium text-text-primary">
                 {districtName || "-"}
               </p>
             </div>
 
             <div>
-              <p className="text-sm text-[#8c9299]">Appointment Location</p>
+              <p className="text-sm text-text-primary">Appointment Location</p>
 
-              <p className="mt-1 font-medium text-[#495057]">
+              <p className="mt-1 font-medium text-text-primary">
                 {locationName || "-"}
               </p>
             </div>
 
             <div>
-              <p className="text-sm text-[#8c9299]">Appointment Date</p>
+              <p className="text-sm text-text-primary">Appointment Date</p>
 
-              <p className="mt-1 font-medium text-[#495057]">{formattedDate}</p>
+              <p className="mt-1 font-medium text-text-primary">
+                {formattedDate}
+              </p>
             </div>
 
             <div>
-              <p className="text-sm text-[#8c9299]">Appointment Time</p>
+              <p className="text-sm text-text-primary">Appointment Time</p>
 
-              <p className="mt-1 font-medium text-[#495057]">
+              <p className="mt-1 font-medium text-text-primary">
                 {appointmentTime || "-"}
               </p>
             </div>
@@ -94,7 +96,7 @@ export default function AppointmentSummary({ onBack, onCancel, onFormNext }) {
       </section>
 
       <section className="mt-10">
-        <h2 className="mb-6 font-serif text-xl uppercase text-[#1c1c1c]">
+        <h2 className="mb-6 font-serif text-xl uppercase text-text-dark">
           Contact Information
         </h2>
 

@@ -18,7 +18,7 @@ export default function BackButton({
         ${
           disabled
             ? "cursor-not-allowed text-gray-400"
-            : "cursor-pointer text-[#2f5f98] hover:text-[#244a78]"
+            : "cursor-pointer text-primary hover:text-hover-primary"
         }
         ${className}
       `}

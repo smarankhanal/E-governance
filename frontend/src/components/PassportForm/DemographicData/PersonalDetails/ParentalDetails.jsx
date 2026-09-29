@@ -18,6 +18,7 @@ export default function ParentalDetails() {
           type="text"
           label="Mother's given name"
           labelclassName="text-base"
+          className="uppercase"
           required
           error={errors.personal?.parental?.motherName?.message}
           {...register("personal.parental.motherName", {
@@ -28,6 +29,7 @@ export default function ParentalDetails() {
           type="text"
           label="Mother's Surname"
           labelclassName="text-base"
+          className="uppercase"
           required
           error={errors.personal?.parental?.motherSurname?.message}
           {...register("personal.parental.motherSurname", {
@@ -38,6 +40,7 @@ export default function ParentalDetails() {
           type="text"
           label="Father's given name"
           labelclassName="text-base"
+          className="uppercase"
           required
           error={errors.personal?.parental?.fatherName?.message}
           {...register("personal.parental.fatherName", {
@@ -48,6 +51,7 @@ export default function ParentalDetails() {
           type="text"
           label="Father's Surname"
           labelclassName="text-base"
+          className="uppercase"
           required
           error={errors.personal?.parental?.fatherSurname?.message}
           {...register("personal.parental.fatherSurname", {

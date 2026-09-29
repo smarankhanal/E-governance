@@ -44,7 +44,7 @@ export default function AccountBenefitsCard({ onClose }) {
       {/* Action buttons */}
       <div className="flex flex-col gap-4 sm:flex-row">
         <button
-          className="flex-1 rounded-lg bg-blue-900 px-6 py-4 text-center text-white transition hover:bg-blue-950"
+          className="flex-1 rounded-lg bg-blue-900 px-6 py-4 text-center text-text-on-primary transition hover:bg-blue-950"
           onClick={() => navigate("/account/Register")}
         >
           Register an account

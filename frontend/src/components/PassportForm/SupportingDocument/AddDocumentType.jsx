@@ -49,7 +49,7 @@ export default function AddDocumentType({
 
   return (
     <div className="mt-4 w-full max-w-45 rounded-lg border border-slate-300 bg-white p-4">
-      <label className="mb-2 block font-serif text-[#294e78]">
+      <label className="mb-2 block font-serif text-primary">
         Document name
       </label>
 
@@ -63,14 +63,14 @@ export default function AddDocumentType({
           }
         }}
         placeholder="Enter document name"
-        className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-[#009DAC] focus:ring-1 focus:ring-[#009DAC]"
+        className="w-full rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-accent focus:ring-1 focus:ring-accent"
       />
 
       <div className="mt-3 flex gap-2">
         <button
           type="button"
           onClick={handleAddDocument}
-          className="rounded-md bg-[#2F5F98] px-4 py-2 text-white transition hover:bg-[#254f80]"
+          className="rounded-md bg-primary px-4 py-2 text-text-on-primary transition hover:bg-primary-hover"
         >
           Add
         </button>

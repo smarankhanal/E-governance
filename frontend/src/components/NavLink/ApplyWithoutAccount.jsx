@@ -14,16 +14,16 @@ export default function ApplyWithoutAccount() {
           justify-center rounded-2xl border border-slate-200
           bg-white px-8 py-10 text-center shadow-sm
           transition-all duration-300
-          hover:-translate-y-1 hover:border-[#2F5F98]
-          hover:bg-[#2F5F98] hover:shadow-xl
+          hover:-translate-y-1 hover:border-primary
+          hover:bg-primary hover:shadow-xl
         "
       >
         {/* Icon */}
-        <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-[#2F5F98]/10 transition-all duration-300 group-hover:bg-white/20 ">
-          <BiSolidUserAccount className="text-5xl text-[#2F5F98] transition-colors duration-300 group-hover:text-white" />
+        <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 transition-all duration-300 group-hover:bg-white/20 ">
+          <BiSolidUserAccount className="text-5xl text-primary transition-colors duration-300 group-hover:text-text-on-primary" />
         </div>
 
-        <p className="text-lg font-bold text-[#2F5F98]  transition-colors duration-300 group-hover:text-white">
+        <p className="text-lg font-bold text-primary  transition-colors duration-300 group-hover:text-text-on-primary">
           Apply without an account
         </p>
       </div>

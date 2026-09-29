@@ -7,7 +7,7 @@ export default function AppointmentStep({ currentStep }) {
   return (
     <div className="w-full px-2 py-4 sm:px-4">
       {/* ================= Step Navigation ================= */}
-      <div className="flex w-full items-center rounded-lg border border-[#e1e5e9] px-4 py-4 sm:px-8">
+      <div className="flex w-full items-center rounded-lg border border-border-light px-4 py-4 sm:px-8">
         {steps.map((step, index) => {
           const stepNumber = index + 1;
 
@@ -20,7 +20,7 @@ export default function AppointmentStep({ currentStep }) {
                 className={`
                   flex items-center gap-1
                   font-serif text-sm sm:text-lg
-                  ${isActive ? "text-[#597fad]" : "text-[#6f747a]"}
+                  ${isActive ? "text-text-option" : "text-text-muted"}
                 `}
               >
                 {/* Chevron before each step */}
@@ -29,7 +29,7 @@ export default function AppointmentStep({ currentStep }) {
                 {/* Active step gets an underline */}
                 <span
                   className={`
-                    ${isActive ? "border-b-2 border-[#597fad] pb-1" : ""}
+                    ${isActive ? "border-b-2 border-text-option pb-1" : ""}
                   `}
                 >
                   {step}

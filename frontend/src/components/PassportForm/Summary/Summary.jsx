@@ -113,7 +113,7 @@ export default function Summary({ onFormBack, onCancel }) {
   const residentialAddress = [
     {
       label1: "Country",
-      value1: formData.residentialAddress?.country,
+      value1: formData.residentialAddress?.country || "Nepal",
       label2: "Province",
       value2: formData.residentialAddress?.provinceName,
     },
@@ -134,7 +134,30 @@ export default function Summary({ onFormBack, onCancel }) {
       value1: formData.residentialAddress?.houseNumber,
     },
   ];
-
+  const temporaryAddress = [
+    {
+      label1: "Country",
+      value1: formData.temporaryAddress?.country || "Nepal",
+      label2: "Province",
+      value2: formData.temporaryAddress?.provinceName,
+    },
+    {
+      label1: "District",
+      value1: formData.temporaryAddress?.districtName,
+      label2: "Municipality",
+      value2: formData.temporaryAddress?.municipalityName,
+    },
+    {
+      label1: "Ward",
+      value1: formData.temporaryAddress?.ward,
+      label2: "Street",
+      value2: formData.temporaryAddress?.street,
+    },
+    {
+      label1: "House number",
+      value1: formData.temporaryAddress?.houseNumber,
+    },
+  ];
   const proxyDetails = [
     {
       label1: "Proxy",
@@ -212,6 +235,7 @@ export default function Summary({ onFormBack, onCancel }) {
     navigate(`/application/${applicationId}/success`, {
       state: {
         formData,
+        selectedDocument,
       },
     });
   };
@@ -240,6 +264,7 @@ export default function Summary({ onFormBack, onCancel }) {
 
         {/* Residential Address */}
         <DetailsTable title="RESIDENTIAL ADDRESS" rows={residentialAddress} />
+        <DetailsTable title="TEMPORARY ADDRESS" rows={temporaryAddress} />
 
         {/*Parental Details */}
         <DetailsTable title="PARENTAL DETAILS" rows={parentalDetails} />
@@ -269,7 +294,7 @@ export default function Summary({ onFormBack, onCancel }) {
 
         <button
           type="submit"
-          className="rounded-md bg-[#2F5F98] px-8 py-3 font-serif text-base font-medium text-white transition hover:bg-[#294e78]"
+          className="rounded-md bg-primary px-8 py-3 font-serif text-base font-medium text-text-on-primary transition hover:bg-secondary"
           onClick={onApply}
         >
           APPLY

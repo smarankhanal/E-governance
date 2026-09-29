@@ -65,8 +65,8 @@ export default function PassportTypeSelector({ selected }) {
 
                     ${
                       isSelected
-                        ? "border-[#2f5f98] bg-[#e9f2fb] shadow-[0_4px_15px_rgba(47,95,152,0.12)]"
-                        : "border-slate-200 bg-white hover:border-[#2f5f98] hover:bg-[#2f5f98] hover:shadow-md"
+                        ? "border-primary bg-surface-selected shadow-[0_4px_15px_rgba(47,95,152,0.12)]"
+                        : "border-slate-200 bg-white hover:border-primary hover:bg-primary hover:shadow-md"
                     }
                   `}
               >
@@ -78,8 +78,8 @@ export default function PassportTypeSelector({ selected }) {
 
                       ${
                         isSelected
-                          ? "bg-[#2f5f98] text-white"
-                          : "bg-[#eef4f9] text-[#2f5f98] group-hover:bg-[#2f5f98] group-hover:text-white"
+                          ? "bg-primary text-text-on-primary"
+                          : "bg-[#eef4f9] text-primary group-hover:bg-primary group-hover:text-text-on-primary"
                       }
                     `}
                 >
@@ -93,11 +93,11 @@ export default function PassportTypeSelector({ selected }) {
                         text-lg font-bold leading-tight tracking-wide
                         transition-colors duration-200
 
-                        ${
-                          isSelected
-                            ? "text-[#2f5f98]"
-                            : "text-[#495057] group-hover:text-white"
-                        }
+                     ${
+                       isSelected
+                         ? "text-primary"
+                         : "text-text-primary group-hover:text-text-on-primary"
+                     }
                       `}
                   >
                     {type.en1}
@@ -110,8 +110,8 @@ export default function PassportTypeSelector({ selected }) {
 
                         ${
                           isSelected
-                            ? "text-[#2f5f98]"
-                            : "text-[#495057] group-hover:text-white"
+                            ? "text-primary"
+                            : "text-text-primary group-hover:text-text-on-primary"
                         }
                       `}
                   >
@@ -126,8 +126,8 @@ export default function PassportTypeSelector({ selected }) {
 
                           ${
                             isSelected
-                              ? "text-[#2f5f98]"
-                              : "text-[#495057] group-hover:text-white"
+                              ? "text-primary"
+                              : "text-text-primary group-hover:text-text-on-primary"
                           }
                         `}
                     >

@@ -1,21 +1,45 @@
-import { drawSectionTitle, drawRow, formatDate, pick, sexCode } from "../utils";
+import {
+  drawSectionTitle,
+  drawRow,
+  formatDate,
+  pick,
+  sexCode,
+  calculateAge,
+} from "../utils";
 
 export const drawPersonalInformation = (doc, data, y) => {
   const p = data?.personalDetails?.personal ?? {};
   const c = data?.personalDetails?.citizenshipDetail ?? {};
   const prev = data?.previousDocument ?? {};
 
+  const age = calculateAge(p.dateOfBirth_AD);
+  const isMinor = age !== null && age < 16;
+
   y = drawSectionTitle(doc, "Personal Information", y);
 
-  y = drawRow(doc, y, [{ label: "1. Surname *", value: p.surname }]);
-  y = drawRow(doc, y, [{ label: "2. Given Names *", value: p.givenName }]);
+  y = drawRow(doc, y, [
+    {
+      label: "1. Surname *",
+      value: p.surname,
+    },
+  ]);
+
+  y = drawRow(doc, y, [
+    {
+      label: "2. Given Names *",
+      value: p.givenName,
+    },
+  ]);
 
   y = drawRow(doc, y, [
     {
       label: "3. Place of Birth * (District/Country if Abroad)",
       value: p.placeOfBirth,
     },
-    { label: "4. Nationality *", value: p.nationality },
+    {
+      label: "4. Nationality *",
+      value: p.nationality,
+    },
   ]);
 
   y = drawRow(doc, y, [
@@ -23,7 +47,10 @@ export const drawPersonalInformation = (doc, data, y) => {
       label: "5A. Date of Birth A.D. * (YYYY/MM/DD)",
       value: formatDate(p.dateOfBirth_AD),
     },
-    { label: "5B. Date of Birth B.S. * (YYYY/MM/DD)", value: p.dateOfBirth_BS },
+    {
+      label: "5B. Date of Birth B.S. * (YYYY/MM/DD)",
+      value: p.dateOfBirth_BS,
+    },
     {
       label: "6. Sex *",
       value: sexCode(p.gender),
@@ -33,15 +60,24 @@ export const drawPersonalInformation = (doc, data, y) => {
 
   y = drawRow(doc, y, [
     {
-      label: "7. Citizenship or Permit No. *",
+      label: "7. Citizenship or Minor No. *",
       value: pick(c.citizenship, c.minorId),
     },
-    { label: "8. Date of Issue A.D. *", value: formatDate(c.issueDate_AD) },
+    {
+      label: "8. Date of Issue A.D. *",
+      value: formatDate(c.issueDate_AD),
+    },
   ]);
 
   y = drawRow(doc, y, [
-    { label: "9. Place of Issue *", value: c.issueDistrict },
-    { label: "10. National Identity No.", value: p.nin },
+    {
+      label: "9. Place of Issue *",
+      value: c.issueDistrict,
+    },
+    {
+      label: "10. National Identity No.",
+      value: p.nin,
+    },
   ]);
 
   y = drawRow(doc, y, [
@@ -49,11 +85,29 @@ export const drawPersonalInformation = (doc, data, y) => {
       label: "11. Latest Passport or Travel Document No.",
       value: prev.passportNumber,
     },
-    { label: "11A. Date of Issue A.D.", value: formatDate(prev.dateOfIssue) },
+    {
+      label: "11A. Date of Issue A.D.",
+      value: formatDate(prev.dateOfIssue),
+    },
   ]);
 
   y = drawRow(doc, y, [
-    { label: "11B. Place of Issue", value: prev.placeOfIssue },
+    {
+      label: "11B. Place of Issue",
+      value: prev.placeOfIssue,
+    },
+  ]);
+
+  y = drawRow(doc, y, [
+    {
+      label: "12. Applicant Age",
+      value: age !== null ? `${age} Years` : "",
+    },
+    {
+      label: "13. Applicant Status",
+      value: isMinor ? "MINOR" : "ADULT",
+      highlight: isMinor,
+    },
   ]);
 
   return y;

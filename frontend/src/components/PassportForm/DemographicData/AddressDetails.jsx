@@ -8,6 +8,7 @@ import CancelButton from "../../Common/Button/CancelButton";
 import NextButton from "../../Common/Button/NextButton";
 import AddressSelector from "../../Address/AddressSelector";
 import Input from "../../Common/Input";
+import TemporaryAddress from "./AddressDetails/TemporaryAddress";
 
 export default function AddressDetails({ onBack, onCancel, onNext }) {
   const {
@@ -44,7 +45,7 @@ export default function AddressDetails({ onBack, onCancel, onNext }) {
         <Input
           label="Ward"
           required
-          className="hover:border-[#009DAC]"
+          className="hover:border-accent"
           error={errors.residentialAddress?.ward?.message}
           {...register("residentialAddress.ward", {
             required: "Ward is required",
@@ -54,7 +55,7 @@ export default function AddressDetails({ onBack, onCancel, onNext }) {
         <Input
           label="Street"
           required
-          className="hover:border-[#009DAC]"
+          className="hover:border-accent"
           error={errors.residentialAddress?.street?.message}
           {...register("residentialAddress.street", {
             required: "Street is required",
@@ -63,11 +64,11 @@ export default function AddressDetails({ onBack, onCancel, onNext }) {
 
         <Input
           label="House Number"
-          className="hover:border-[#009DAC]"
+          className="hover:border-accent"
           {...register("residentialAddress.houseNumber")}
         />
       </div>
-
+      <TemporaryAddress />
       <div className="mt-16 flex items-center justify-between sm:mt-32">
         <div className="flex gap-6">
           <BackButton onClick={onBack} />

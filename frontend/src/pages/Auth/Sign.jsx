@@ -4,7 +4,7 @@ import PassportImg from "../../assets/images/Passport.png";
 import GradientBorderCard from "../../components/Common/GradientBorderBadge";
 export default function Sign() {
   return (
-    <div className="w-full max-w-4xl mx-auto bg-[#F1F1F1] rounded-2xl">
+    <div className="w-full max-w-4xl mx-auto bg-surface rounded-2xl">
       <GradientBorderCard>
         <div className="flex flex-col justify-center items-center">
           <div className="mx-auto  flex h-50 w-50 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm">

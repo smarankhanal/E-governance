@@ -5,7 +5,7 @@ export default function GradientBorderCard({ children }) {
     <div
       className="
         rounded-3xl
-        bg-[linear-gradient(to_bottom,var(--color-primary)_0%,transparent_35%)]
+        bg-linear-to-b from-primary from-0% to-transparent to-35%l
         p-1.5
       "
     >

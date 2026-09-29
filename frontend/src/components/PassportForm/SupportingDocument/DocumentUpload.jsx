@@ -115,7 +115,7 @@ export default function DocumentUpload({ documents, selectedDocument }) {
   };
 
   return (
-    <div className="border-l border-[#2F5F98] pl-8">
+    <div className="border-l border-primary pl-8">
       {/* Hidden file input */}
       <input
         ref={fileInputRef}
@@ -130,7 +130,7 @@ export default function DocumentUpload({ documents, selectedDocument }) {
         <button
           type="button"
           onClick={handleUploadClick}
-          className="flex items-center gap-3 rounded-lg bg-[#2F5F98] px-8 py-4 font-serif text-lg font-semibold text-white transition hover:bg-[#254f80]"
+          className="flex items-center gap-3 rounded-lg bg-primary px-8 py-4 font-serif text-lg font-semibold text-text-on-primary transition hover:bg-primary-hover"
         >
           <FiUpload size={25} />
           Upload
@@ -140,19 +140,19 @@ export default function DocumentUpload({ documents, selectedDocument }) {
           type="button"
           onClick={handleClear}
           disabled={!selected?.files.length}
-          className="rounded-lg bg-[#9db5d2] px-8 py-4 font-serif text-lg font-semibold text-white transition disabled:cursor-not-allowed disabled:bg-slate-300"
+          className="rounded-lg bg-disabled px-8 py-4 font-serif text-lg font-semibold text-text-on-primary transition disabled:cursor-not-allowed disabled:bg-slate-300"
         >
           Clear
         </button>
       </div>
 
       {/* Uploaded files */}
-      <h3 className="mt-4 text-center font-serif text-lg text-[#294e78]">
+      <h3 className="mt-4 text-center font-serif text-lg text-primary">
         UPLOADED FILES
       </h3>
 
       {/* Info */}
-      <div className="mt-4 flex gap-4 rounded-lg bg-[#e5f0ff] px-5 py-5 text-[#2874e8]">
+      <div className="mt-4 flex gap-4 rounded-lg bg-info-bg px-5 py-5 text-info-text">
         <FiInfo size={25} className="mt-1 shrink-0" />
 
         <div className="font-serif text-lg leading-9">

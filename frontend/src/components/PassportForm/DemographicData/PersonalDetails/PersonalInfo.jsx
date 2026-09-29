@@ -23,6 +23,7 @@ export default function PersonalDetails({ districts }) {
         <Input
           label="Given Name"
           placeholder="FIRST NAME MIDDLE NAME"
+          className="uppercase"
           required
           error={errors.personalDetails?.personal?.givenName?.message}
           {...register("personalDetails.personal.givenName", {
@@ -33,6 +34,7 @@ export default function PersonalDetails({ districts }) {
         <Input
           label="Surname"
           placeholder="SURNAME"
+          className="uppercase"
           required
           error={errors.personalDetails?.personal?.surname?.message}
           {...register("personalDetails.personal.surname", {

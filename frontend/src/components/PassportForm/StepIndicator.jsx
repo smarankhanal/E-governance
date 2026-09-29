@@ -23,8 +23,8 @@ export default function PassportForm({ steps, currentStep }) {
 
                     ${
                       isActive
-                        ? "border-[#1c3f5e] text-black"
-                        : "border-[#c7ccd1] bg-transparent text-[#c7ccd1]"
+                        ? "border-step-active text-black"
+                        : "border-border-muted bg-transparent text-border-muted"
                     }
                   `}
                 >
@@ -43,8 +43,8 @@ export default function PassportForm({ steps, currentStep }) {
 
                     ${
                       isActive
-                        ? "font-semibold text-[#1c1c1c]"
-                        : "font-normal text-[#9aa1a8]"
+                        ? "font-semibold text-text-dark"
+                        : "font-normal text-text-placeholder"
                     }
                   `}
                 >
@@ -59,7 +59,7 @@ export default function PassportForm({ steps, currentStep }) {
                     mt-3.5 
                     h-px 
                     flex-1 
-                    bg-[#dcdfe3] 
+                    bg-border-divider 
                     sm:mx-2 
                     sm:mt-4.25
                   "

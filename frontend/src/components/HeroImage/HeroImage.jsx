@@ -16,12 +16,12 @@ export default function HeroImage() {
 
       {/* Hero Content */}
       <div className="absolute inset-0 z-10 flex items-center justify-center px-4 text-center">
-        <div className="max-w-3xl text-white">
+        <div className="max-w-3xl text-text-on-primary">
           <h1 className="text-3xl font-bold md:text-5xl">
             Passport Application & Appointment System
           </h1>
 
-          <p className="mt-4 text-base text-white/90 md:text-lg">
+          <p className="mt-4 text-base text-text-on-primary/90 md:text-lg">
             Apply for your passport and manage your appointment conveniently
             through our online service.
           </p>

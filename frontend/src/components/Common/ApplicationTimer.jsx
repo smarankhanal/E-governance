@@ -49,9 +49,7 @@ export default function ApplicationTimer({ expiresAt, onExpire }) {
   return (
     <div
       className={`rounded-md px-3 py-2 text-sm font-medium ${
-        isAlmostExpired
-          ? "bg-red-100 text-red-600"
-          : "bg-[#e5f0ff] text-[#2F5F98]"
+        isAlmostExpired ? "bg-red-100 text-red-600" : "bg-info-bg text-primary"
       }`}
     >
       <span>Time remaining: </span>

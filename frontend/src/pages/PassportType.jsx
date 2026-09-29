@@ -38,11 +38,11 @@ export default function PassportType() {
   return (
     <div className="mx-auto w-full max-w-7xl px-5 py-8 shadow-md">
       <div className="text-center">
-        <p className="font-serif text-[30px] font-medium uppercase text-[#495057] sm:text-[46px]">
+        <p className="font-serif text-[30px] font-medium uppercase text-text-primary sm:text-[46px]">
           Type of Passport
         </p>
 
-        <p className="mt-6 mb-3 font-serif font-normal text-[#92969a]">
+        <p className="mt-6 mb-3 font-serif font-normal text-text-primary">
           Please select your Passport type.
         </p>
       </div>
@@ -52,7 +52,7 @@ export default function PassportType() {
           className="flex cursor-pointer items-center rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-sm transition-colors hover:bg-gray-50"
           onClick={() => setExpand((prev) => !prev)}
         >
-          <p className="flex items-center gap-2 text-lg font-medium text-[#495057]">
+          <p className="flex items-center gap-2 text-lg font-medium text-text-primary">
             {expand ? (
               <MdOutlineKeyboardArrowDown className="text-xl" />
             ) : (

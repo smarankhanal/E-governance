@@ -55,7 +55,7 @@ export default function ReloadNotice({
         <button
           type="button"
           onClick={handleOk}
-          className="w-full rounded-md bg-[#2f5f98] py-3 font-semibold text-white"
+          className="w-full rounded-md bg-primary py-3 font-semibold text-text-on-primary"
         >
           OK
         </button>

@@ -25,8 +25,8 @@ export default function TimeSlotPicker({ value, onChange }) {
             transition-all duration-200
             ${
               period === "AM"
-                ? "border-[#2F5F98] bg-[#eaf2fb] text-[#2F5F98]"
-                : "border-[#2F5F98] bg-white text-[#294e78]"
+                ? "border-primary bg-primary text-text-on-primary"
+                : "border-primary bg-white text-primary hover:bg-surface-hover"
             }
           `}
         >
@@ -42,8 +42,8 @@ export default function TimeSlotPicker({ value, onChange }) {
             transition-all duration-200
             ${
               period === "PM"
-                ? "border-[#2F5F98] bg-[#eaf2fb] text-[#2F5F98]"
-                : "border-[#2F5F98] bg-white text-[#294e78]"
+                ? "border-primary bg-primary  text-text-on-primary"
+                : "border-primary bg-white text-primary hover:bg-surface-hover"
             }
           `}
         >
@@ -67,8 +67,8 @@ export default function TimeSlotPicker({ value, onChange }) {
                 transition-all duration-200
                 ${
                   isSelected
-                    ? "border-[#2F5F98] bg-[#2F5F98] text-white"
-                    : "border-[#2F5F98] bg-white text-[#294e78] hover:bg-[#eaf2fb]"
+                    ? "border-primary bg-primary text-text-on-primary"
+                    : "border-primary bg-white text-primary hover:bg-surface-hover"
                 }
               `}
             >

@@ -11,13 +11,16 @@ export default function RequestSuccess() {
   const location = useLocation();
   const formData = location.state?.formData;
   const appointmentDetails = formData?.appointment;
+  const selectedDocument = location?.state?.selectedDocument;
+
   const handleDownloadPDF = async () => {
     try {
-      const response = await generatePassportPDF({
+      await generatePassportPDF({
         ...formData,
         applicationId,
-        passportType,
+        passportType: passportType.keyword.toLowerCase(),
         appointment: appointmentDetails,
+        selectedDocument,
       });
     } catch (error) {
       console.error("Failed to generate PDF:", error);
@@ -28,7 +31,7 @@ export default function RequestSuccess() {
     <div className="min-h-screen bg-gray-100 px-3 py-6 sm:px-6">
       <div className="mx-auto w-full max-w-4xl bg-white shadow-sm">
         {/* Top Border */}
-        <div className="h-1.5 bg-[#2F5F98]" />
+        <div className="h-1.5 bg-primary" />
 
         <div className="px-5 py-5 sm:px-8">
           {/* Header */}
@@ -36,14 +39,14 @@ export default function RequestSuccess() {
             <div className="flex-1">
               <p className=" text-gray-500">Request Number</p>
 
-              <p className="mt-1  font-medium text-[#495057]">
+              <p className="mt-1  font-medium text-text-primary">
                 {applicationId}
               </p>
 
               <div className="mt-5">
                 <p className=" text-gray-500">E-Service</p>
 
-                <h1 className="mt-1 font-medium text-[#495057]">
+                <h1 className="mt-1 font-medium text-text-primary">
                   {passportType?.en1 && `${passportType?.en1} `}
                   {passportType?.en2 && `${passportType?.en2} `}
                   {passportType?.en3 && passportType?.en3}
@@ -68,13 +71,13 @@ export default function RequestSuccess() {
               <div>
                 <p className=" text-gray-500">Request History</p>
 
-                <p className="mt-1 text-[#495057]">
+                <p className="mt-1 text-text-primary">
                   {new Date().toLocaleString("en-US")}
                 </p>
               </div>
             </div>
             <div className="flex justify-center items-center">
-              <p className=" font-medium text-[#495057]">
+              <p className=" font-medium text-text-primary">
                 Request has been successfully submitted
               </p>
             </div>
@@ -89,7 +92,7 @@ export default function RequestSuccess() {
               <div>
                 <p className=" text-gray-500">Date</p>
 
-                <p className="mt-0.5  font-medium text-[#495057]">
+                <p className="mt-0.5  font-medium text-text-primary">
                   {appointmentDetails?.appointmentDate
                     ? appointmentDetails?.appointmentDate.toLocaleDateString(
                         "en-CA",
@@ -102,7 +105,7 @@ export default function RequestSuccess() {
               <div className="mt-3">
                 <p className=" text-gray-500">Time</p>
 
-                <p className="mt-0.5  font-medium text-[#495057]">
+                <p className="mt-0.5  font-medium text-text-primary">
                   {appointmentDetails?.appointmentTime}
                 </p>
               </div>
@@ -111,7 +114,7 @@ export default function RequestSuccess() {
               <div className="mt-3">
                 <p className=" text-gray-500">Location</p>
 
-                <p className="mt-0.5  font-medium text-[#495057]">
+                <p className="mt-0.5  font-medium text-text-primary">
                   {appointmentDetails?.locationName}
                 </p>
               </div>
@@ -120,7 +123,7 @@ export default function RequestSuccess() {
 
           {/* Instruction */}
           <div className="my-5 border-y border-gray-200 py-4 text-center">
-            <p className="text-xs font-medium text-[#a85b5b]">
+            <p className="text-xs font-medium text-status-warning">
               Please print the form or take a screen shot of the downloaded form
               with barcode before going to the enrollment center
             </p>
@@ -131,7 +134,7 @@ export default function RequestSuccess() {
             <button
               type="button"
               onClick={handleDownloadPDF}
-              className="min-w-33.75 bg-[#2F5F98] px-6 py-2 font-medium text-white transition hover:bg-[#294e78] focus:outline-none"
+              className="min-w-33.75 bg-primary px-6 py-2 font-medium text-text-on-primary transition hover:bg-secondary focus:outline-none"
             >
               Download PDF
             </button>

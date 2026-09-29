@@ -11,10 +11,10 @@ export default function SignInBenefits() {
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto bg-[#f6f9fd]  rounded-2xl border border-[#d6deeb] shadow-md p-4">
+    <div className="w-full max-w-7xl mx-auto bg-surface-page-light  rounded-2xl border border-border-page-light shadow-md p-4">
       {/* Heading */}
 
-      <p className="text-center text-xl font-bold text-[#2F5F98] sm:text-2xl p-2">
+      <p className="text-center text-xl font-bold text-primary sm:text-2xl p-2">
         Creating an account allows applicants to:
       </p>
 

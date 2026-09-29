@@ -19,18 +19,18 @@ export default function DocumentTypeList({
               type="button"
               onClick={() => setSelectedDocument(document.id)}
               className={`relative flex w-full flex-col items-center justify-center border-b border-slate-200 px-5 py-5 text-center transition ${
-                isSelected ? "bg-[#e5f0ff]" : "bg-white hover:bg-slate-50"
+                isSelected ? "bg-info-bg" : "bg-white hover:bg-slate-50"
               }`}
             >
               <FiFolder
                 size={48}
                 strokeWidth={1.7}
-                className={isSelected ? "text-red-500" : "text-[#405d7c]"}
+                className={isSelected ? "text-red-500" : "text-text-document"}
               />
 
               <div
                 className={`mt-2 flex items-center gap-1 font-serif text-[18px] leading-9 ${
-                  isSelected ? "text-red-500" : "text-[#405d7c]"
+                  isSelected ? "text-red-500" : "text-text-document"
                 }`}
               >
                 <span>{document.label}</span>
@@ -39,7 +39,7 @@ export default function DocumentTypeList({
               </div>
 
               {document.files?.length > 0 && (
-                <span className="mt-1 rounded-full bg-[#2F5F98] px-3 py-1 text-xs text-white">
+                <span className="mt-1 rounded-full bg-primary px-3 py-1 text-xs text-text-on-primary">
                   {document.files.length}/{document.maxScans}
                 </span>
               )}
@@ -57,7 +57,7 @@ export default function DocumentTypeList({
       <button
         type="button"
         onClick={onAddDocument}
-        className="mt-6 flex items-center gap-2 rounded-lg bg-[#2F5F98] px-7 py-3 font-serif text-lg text-white transition hover:bg-[#254f80]"
+        className="mt-6 flex items-center gap-2 rounded-lg bg-primary px-7 py-3 font-serif text-lg text-text-on-primary transition hover:bg-primary-hover"
       >
         <FiPlusCircle size={23} />
         Add

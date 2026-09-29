@@ -75,11 +75,11 @@ export default function FAQ() {
     <section className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8">
       {/* Header */}
       <div className="mb-10 text-center">
-        <p className="font-serif text-[32px] font-medium uppercase text-[#495057] sm:text-[46px]">
+        <p className="font-serif text-[32px] font-medium uppercase text-text-primary  sm:text-[46px]">
           Frequently Asked Questions
         </p>
 
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#92969a] sm:text-base">
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-text-on-primary sm:text-base">
           Find answers to common questions about passport applications,
           documents, enrollment, and the application process.
         </p>
@@ -95,7 +95,7 @@ export default function FAQ() {
               key={index}
               className={`overflow-hidden rounded-xl border transition-all duration-300 ${
                 isOpen
-                  ? "border-[#2f5f98] shadow-sm"
+                  ? "shadow-sm border-primary"
                   : "border-slate-200 bg-white"
               }`}
             >
@@ -104,15 +104,15 @@ export default function FAQ() {
                 type="button"
                 onClick={() => toggleFAQ(index)}
                 className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors duration-200 sm:px-6 ${
-                  isOpen ? "bg-[#f1f6fb]" : "bg-white hover:bg-slate-50"
+                  isOpen ? "bg-surface-faq" : "bg-white hover:bg-slate-50"
                 }`}
               >
-                <span className="text-sm font-semibold text-[#495057] sm:text-base">
+                <span className="text-sm font-semibold text-text-primary sm:text-base">
                   {faq.question}
                 </span>
 
                 <MdOutlineKeyboardArrowDown
-                  className={`shrink-0 text-2xl text-[#2f5f98] transition-transform duration-300 ${
+                  className={`shrink-0 text-2xl text-primary transition-transform duration-300 ${
                     isOpen ? "rotate-180" : ""
                   }`}
                 />

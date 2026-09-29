@@ -5,7 +5,64 @@ html {
 * {
   font-family: serif;
 }
-:root {
+
+@theme {
+  /* Brand */
   --color-primary: #2f5f98;
+  --color-primary-dark: #2c4a6e;
+  --color-primary-hover: #254d7d;
+  --color-primary-dark-hover: #243d5b;
+  --color-accent: #009dac;
+
+  /* Surface */
+  --color-surface: #f1f1f1;
+  --color-surface-hover: #eaf2fb;
+  --color-surface-selected: #e9f2fb;
+  --color-surface-card: #eef4f9;
+  --color-surface-muted: #f5f6f7;
+  --color-surface-page-light: #f6f9fd;
+  --color-surface-faq: #f1f6fb;
+  --color-info-bg: #e5f0ff;
+
+  /* Text */
+  --color-text-primary: #495057;
+  --color-text-secondary: #8c9299;
+  --color-text-label: #495070;
+  --color-text-option: #597fad;
+  --color-text-placeholder: #9aa1a8;
+  --color-text-muted: #6f747a;
+  --color-text-dark: #1f2937;
+  --color-text-on-primary: #ffffff;
+  --color-text-document: #405d7c;
+  --color-info-text: #2874e8;
+
+  /* Links */
+  --color-link: #2c6ecb;
+  --color-link-auth: #4e5f98;
+
+  /* Borders */
+  --color-border-input: #ccd3db;
+  --color-border-light: #e1e5e9;
+  --color-border-card: #d9dee5;
+  --color-border-muted: #c7ccd1;
+  --color-border-divider: #dcdfe3;
+  --color-border-page-light: #d6deeb;
+
+  /* Icons */
+  --color-icon-secondary: #707985;
+  --color-icon-hover: #34404d;
+
+  /* Step */
+  --color-step-active: #1c3f5e;
+
+  /* Status */
+  --color-status-warning: #a85b5b;
+
+  /* Disabled */
+  --color-disabled: #9db5d2;
+
+  /* Heading */
+  --color-heading-accent: #37659a;
 }
+
 @import "./styles/Calendar.css";

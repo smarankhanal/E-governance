@@ -48,12 +48,12 @@ export default function DataPrivacyConsentModal({
 
           {/* Actions */}
           <div className="mt-8 flex items-center justify-center gap-6">
-            <button onClick={onRefuse} className="font-medium text-[#2c6ecb] ">
+            <button onClick={onRefuse} className="font-medium text-link ">
               I refuse
             </button>
             <button
               onClick={handleOnAgree}
-              className="rounded-md bg-[#2c4a6e] px-8 py-2.5 font-medium text-white transition-colors hover:bg-[#243d5b]"
+              className="rounded-md bg-primary-dark px-8 py-2.5 font-medium text-text-on-primary transition-colors hover:bg-[primary-dark-hover]"
             >
               I agree
             </button>

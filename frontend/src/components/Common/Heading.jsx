@@ -3,11 +3,11 @@ import React from "react";
 export default function Heading({ text, className }) {
   return (
     <div className={`text-center ${className}`}>
-      <h3 className="font-serif text-left text-[#495057] font-weight:600 text-xl">
+      <h3 className="font-serif text-left text-text-primary font-weight:600 text-xl">
         {text}
       </h3>
 
-      <div className="mt-4 h-1 w-full bg-[#37659a]" />
+      <div className="mt-4 h-1 w-full bg-heading-accent" />
     </div>
   );
 }

@@ -67,7 +67,7 @@ export default function DocumentPreview({
           type="button"
           onClick={handlePrevious}
           disabled={!selected?.files.length || selected.files.length <= 1}
-          className="text-slate-400 transition hover:text-[#2F5F98] disabled:cursor-not-allowed disabled:opacity-30"
+          className="text-slate-400 transition hover:text-text-on-primary disabled:cursor-not-allowed disabled:opacity-30"
         >
           <FiChevronLeft size={35} />
         </button>
@@ -88,7 +88,7 @@ export default function DocumentPreview({
                   type="button"
                   onClick={handleRemoveFile}
                   title="Remove file"
-                  className="absolute right-2 top-2 rounded-full bg-red-500 p-2 text-white transition hover:bg-red-600"
+                  className="absolute right-2 top-2 rounded-full bg-red-500 p-2 text-text-on-primary transition hover:bg-red-600"
                 >
                   <FiX size={18} />
                 </button>
@@ -97,7 +97,7 @@ export default function DocumentPreview({
               <div className="flex flex-col items-center text-center">
                 <FiImage size={55} className="text-slate-400" />
 
-                <p className="mt-4 max-w-45 font-serif text-lg font-semibold leading-8 text-[#495057]">
+                <p className="mt-4 max-w-45 font-serif text-lg font-semibold leading-8 text-text-primary">
                   {selected?.label || "Select a document"}
                 </p>
               </div>
@@ -105,7 +105,7 @@ export default function DocumentPreview({
           </div>
 
           {/* Filename */}
-          <p className="mt-4 max-w-45 wrap-break-word text-center font-serif text-lg font-semibold text-[#495057]">
+          <p className="mt-4 max-w-45 wrap-break-word text-center font-serif text-lg font-semibold text-text-primary">
             {currentFile
               ? currentFile.name
               : selected
@@ -126,7 +126,7 @@ export default function DocumentPreview({
           type="button"
           onClick={handleNext}
           disabled={!selected?.files.length || selected.files.length <= 1}
-          className="text-slate-400 transition hover:text-[#2F5F98] disabled:cursor-not-allowed disabled:opacity-30"
+          className="text-slate-400 transition hover:text-text-on-primary disabled:cursor-not-allowed disabled:opacity-30"
         >
           <FiChevronRight size={35} />
         </button>
@@ -140,7 +140,7 @@ export default function DocumentPreview({
           <span
             key={index}
             className={`h-3 w-12 transition ${
-              index === currentFileIndex ? "bg-[#2F5F98]" : "bg-slate-300"
+              index === currentFileIndex ? "bg-primary" : "bg-slate-300"
             }`}
           />
         ))}

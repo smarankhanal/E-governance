@@ -21,7 +21,7 @@ export default function LoginForm() {
       <div className="px-4 m-6">
         <Button logo={MdOutlineExitToApp}>Sign in</Button>
       </div>
-      <p className="text-[#2f5f98] font-bold p-4 m-6">Recover Password</p>
+      <p className="text-primary font-bold p-4 m-6">Recover Password</p>
     </form>
   );
 }

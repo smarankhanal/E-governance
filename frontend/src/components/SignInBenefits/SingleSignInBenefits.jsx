@@ -6,8 +6,8 @@ export default function SingleSignInBenefits({
 }) {
   return (
     <div className="flex flex-nowrap items-center gap-3 rounded-2xl bg-white p-4 border border-slate-200/80 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] max-w-lg">
-      <FaCheck className="text-[#2F5F98] sm:text-lg text-sm" />
-      <span className="font-serif sm:text-lg text-sm font-semibold text-[#2F5F98]">
+      <FaCheck className="text-primary sm:text-lg text-sm" />
+      <span className="font-serif sm:text-lg text-sm font-semibold text-primary">
         {text}
       </span>
     </div>

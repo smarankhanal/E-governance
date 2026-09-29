@@ -15,12 +15,12 @@ export default function Input({
     <div className="flex flex-col gap-2 mx-2">
       {label && (
         <label
-          className={`font-serif text-[#294e78] ${labelclassName || "sm:text-xl"}`}
+          className={`font-serif text-text-primary ${labelclassName || "sm:text-xl"}`}
         >
           {label}
           {required && (
             <span
-              className={`ml-1 ${error ? "text-red-500" : "text-[#495070]"}`}
+              className={`ml-1 ${error ? "text-red-500" : "text-text-label"}`}
             >
               *
             </span>
@@ -33,7 +33,7 @@ export default function Input({
         className={`w-full outline-none rounded-md border border-gray-200 bg-white px-4 py-3 text-gray-700  placeholder:text-gray-400   ${
           error
             ? "border-red-500 bg-red-50 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-            : "border-slate-300 bg-white focus:border-[#009DAC] focus:ring-1 focus:ring-[#009DAC]"
+            : "border-slate-300 bg-white focus:border-accent focus:ring-1 focus:ring-accent"
         } ${className}`}
         {...props}
       />

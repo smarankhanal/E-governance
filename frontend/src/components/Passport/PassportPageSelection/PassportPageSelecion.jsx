@@ -19,7 +19,7 @@ const RadioOption = ({ label, selected, onClick }) => (
       {selected && <span className="h-3 w-3 rounded-full bg-blue-600" />}
     </span>
 
-    <span className="text-[22px] text-[#495057]">{label}</span>
+    <span className="text-[22px] text-text-primary">{label}</span>
   </button>
 );
 
@@ -40,7 +40,7 @@ export default function PassportPageSelection({ onNext }) {
           DOCUMENT SELECTION
         </h1>
 
-        <div className="mt-2 mb-8 h-0.75 bg-[#2f5f98]" />
+        <div className="mt-2 mb-8 h-0.75 bg-primary" />
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           <div>
@@ -70,7 +70,7 @@ export default function PassportPageSelection({ onNext }) {
               READ BEFORE PRE-ENROLLMENT
             </h2>
 
-            <ol className="space-y-6 pl-6 text-[18px] leading-relaxed text-[#495057]">
+            <ol className="space-y-6 pl-6 text-[18px] leading-relaxed text-text-primary">
               <li>
                 1. The pre-enrollment form alone is insufficient for passport
                 issuance. Applicant must be present in-person at the enrollment

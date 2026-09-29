@@ -94,7 +94,7 @@ export default function NavBar() {
                   key={link.path}
                   type="button"
                   onClick={() => handleNavigation(link.path)}
-                  className="text-sm font-medium text-[#495057] transition hover:text-[#2F5F98]"
+                  className="text-sm font-medium text-text-primary transition hover:text-text-on-primary"
                 >
                   {link.text}
                 </button>
@@ -108,9 +108,9 @@ export default function NavBar() {
 
           <div className="flex items-center gap-3">
             {applicationId && (
-              <div className="hidden text-sm font-medium text-[#495057] lg:block">
+              <div className="hidden text-sm font-medium text-text-primary lg:block">
                 Application ID:{" "}
-                <span className="font-bold text-[#2F5F98]">
+                <span className="font-bold text-text-on-primary">
                   {applicationId}
                 </span>
               </div>
@@ -124,7 +124,7 @@ export default function NavBar() {
             )}
 
             <div className="flex items-center gap-2">
-              <FaUniversalAccess className="text-xl text-[#495057]" />
+              <FaUniversalAccess className="text-xl text-text-primary" />
 
               <AnchorTag text="Sign in" to="/login" />
             </div>
@@ -132,7 +132,7 @@ export default function NavBar() {
             <button
               type="button"
               onClick={() => setIsOpen((prev) => !prev)}
-              className="text-2xl text-[#495057] md:hidden"
+              className="text-2xl text-text-primary md:hidden"
               aria-label="Toggle menu"
             >
               {isOpen ? <FaTimes /> : <FaBars />}
@@ -147,7 +147,7 @@ export default function NavBar() {
                 key={link.path}
                 type="button"
                 onClick={() => handleNavigation(link.path)}
-                className="text-left text-sm font-medium text-[#495057] transition hover:text-[#2F5F98]"
+                className="text-left text-sm font-medium text-text-primary transition hover:text-text-on-primary"
               >
                 {link.text}
               </button>
@@ -158,9 +158,9 @@ export default function NavBar() {
             )}
 
             {applicationId && (
-              <div className="text-sm font-medium text-[#495057]">
+              <div className="text-sm font-medium text-text-primary">
                 Application ID:{" "}
-                <span className="font-bold text-[#2F5F98]">
+                <span className="font-bold text-text-on-primary">
                   {applicationId}
                 </span>
               </div>

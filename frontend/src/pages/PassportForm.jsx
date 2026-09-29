@@ -96,7 +96,18 @@ export default function PassportForm() {
         street: "",
         houseNumber: "",
       },
-
+      temporaryAddress: {
+        country: "",
+        province: "",
+        provinceName: "",
+        district: "",
+        districtName: "",
+        municipality: "",
+        municipalityName: "",
+        ward: "",
+        street: "",
+        houseNumber: "",
+      },
       proxyDetails: {
         proxy: "",
         firstName: "",

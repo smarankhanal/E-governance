@@ -67,6 +67,7 @@ export default function ProxyDetails({ onBack, onCancel, onFormNext }) {
           type="text"
           label="Proxy's given name"
           required
+          className="uppercase"
           disabled={!isMinor}
           error={errors.proxyDetails?.firstName?.message}
           {...register("proxyDetails.firstName", {
@@ -78,6 +79,7 @@ export default function ProxyDetails({ onBack, onCancel, onFormNext }) {
           type="text"
           label="Proxy's surname"
           required
+          className="uppercase"
           disabled={!isMinor}
           error={errors.proxyDetails?.surname?.message}
           {...register("proxyDetails.surname", {
