@@ -16,7 +16,7 @@ import {
 } from "../components";
 
 import CancelPopUp from "../components/PopUp/CancelPopUp";
-
+import { documentsData, additionalDocumentsData } from "../data";
 import { useApplicationSession } from "../Context/ApplicationSessionContext";
 import ReloadNotice from "../components/PopUp/ReloadNotice";
 
@@ -114,19 +114,6 @@ export default function PassportForm() {
         surname: "",
       },
 
-      temporaryAddress: {
-        country: "NEPAL",
-        province: "",
-        provinceName: "",
-        district: "",
-        districtName: "",
-        municipality: "",
-        municipalityName: "",
-        ward: "",
-        tole: "",
-        houseNumber: "",
-      },
-
       previousDocument: {
         passportNumber: "",
         dateOfIssue: null,
@@ -138,9 +125,9 @@ export default function PassportForm() {
         countryOfTheft: "",
         dateOfTheft: "",
       },
-      documents: [],
+      documents: documentsData,
 
-      additionalDocuments: [],
+      additionalDocuments: additionalDocumentsData,
     },
   });
 

@@ -79,7 +79,7 @@ export default function PassportTypeSelector({ selected }) {
                       ${
                         isSelected
                           ? "bg-primary text-text-on-primary"
-                          : "bg-[#eef4f9] text-primary group-hover:bg-primary group-hover:text-text-on-primary"
+                          : "bg-surface-card text-primary group-hover:bg-primary group-hover:text-text-on-primary"
                       }
                     `}
                 >
