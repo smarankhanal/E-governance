@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import {
-  PageHeader,
   CollectionFilters,
   CollectionStats,
   PassportCollectionTable,
-} from "../components";
-import { INITIAL_PASSPORTS } from "../features/applications/applicationData";
+} from "../features/collected";
+import { PageHeader } from "../components";
+import { INITIAL_PASSPORTS } from "../data/applicationData";
 export default function Collected() {
   const [passports, setPassports] = useState(INITIAL_PASSPORTS);
   const [filter, setFilter] = useState("All");

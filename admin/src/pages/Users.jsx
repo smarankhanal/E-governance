@@ -1,21 +1,18 @@
 import { useMemo, useState } from "react";
 
+import { ApplicationModal, useApplications } from "../features/applications";
+import { applicationType } from "../features/applications/utils/applicationUtils";
 import {
-  useApplications,
-  updateApplication,
-} from "../features/applications/applicationsStore/applicationsStore";
-
-import {
-  ApplicationModal,
-  applicationType,
-} from "../features/applications/applicationUtils/applicationUi";
-
-import { UserFilters, UserHeader, UserStats, UsersTable } from "../components";
+  UserFilters,
+  UserHeader,
+  UserStats,
+  UsersTable,
+} from "../features/users";
 
 const userCode = (id) => `USR-${String(id).padStart(4, "0")}`;
 
 export default function Users() {
-  const applications = useApplications();
+  const { applications, updateApplication } = useApplications();
 
   const [query, setQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("All");

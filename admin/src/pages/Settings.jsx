@@ -6,7 +6,8 @@ import {
   SecuritySettings,
   SettingsFooter,
   SettingsTabs,
-} from "../components";
+  SystemSettings,
+} from "../features/settings";
 
 const DEFAULTS = {
   profile: {

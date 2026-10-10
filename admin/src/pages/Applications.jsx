@@ -1,25 +1,22 @@
 import { useMemo, useState } from "react";
 
 import {
-  useApplications,
-  updateApplication,
-  removeApplication,
-} from "../features/applications/applicationsStore/applicationsStore";
-
-import {
-  ApplicationModal,
   applicationType,
   fullName,
-} from "../features/applications/applicationUtils/applicationUi";
+} from "../features/applications/utils/applicationUtils";
+
 import {
+  useApplications,
   ApplicationHeader,
   ApplicationFilters,
   ApplicationStats,
   ApplicationsTable,
-} from "../components";
+  ApplicationModal,
+} from "../features/applications";
 
 export default function Applications() {
-  const applications = useApplications();
+  const { applications, updateApplication, removeApplication } =
+    useApplications();
 
   const [query, setQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("All");

@@ -63,11 +63,6 @@ const navigationGroups = [
     title: "System",
     items: [
       {
-        label: "Reports",
-        path: "/admin/reports",
-        icon: FiBarChart2,
-      },
-      {
         label: "Notifications",
         path: "/admin/notifications",
         icon: FiBell,
