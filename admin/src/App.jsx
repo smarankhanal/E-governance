@@ -9,6 +9,7 @@ import Offices from "./pages/Offices";
 import Settings from "./pages/Settings";
 import Collected from "./pages/Collected";
 import Login from "./pages/Login";
+import StaffManagement from "./pages/StaffManagement";
 export default function App() {
   return (
     <Routes>
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/appointments" element={<Appointments />} />
         <Route path="/admin/applications" element={<Applications />} />
+        <Route path="/admin/staff" element={<StaffManagement />} />
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/collected" element={<Collected />} />
         <Route path="/admin/offices" element={<Offices />} />

@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {
-  FiBarChart2,
   FiBell,
   FiCalendar,
   FiChevronRight,
@@ -13,6 +12,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import { MdOutlineCollections } from "react-icons/md";
+import { PiUserSwitchBold } from "react-icons/pi";
 
 import AdminInfo from "../Common/Admin/AdminInfo";
 import Logo from "../Common/Logo";
@@ -56,6 +56,11 @@ const navigationGroups = [
         label: "Offices",
         path: "/admin/offices",
         icon: FiMapPin,
+      },
+      {
+        label: "Staff Management",
+        path: "/admin/staff",
+        icon: PiUserSwitchBold,
       },
     ],
   },
