@@ -8,12 +8,13 @@ import Users from "./pages/Users";
 import Offices from "./pages/Offices";
 import Settings from "./pages/Settings";
 import Collected from "./pages/Collected";
-
+import Login from "./pages/Login";
 export default function App() {
   return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Navigate to="/admin" replace />} />
+        <Route path="/admin/login" element={<Login />} />
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/appointments" element={<Appointments />} />
         <Route path="/admin/applications" element={<Applications />} />
